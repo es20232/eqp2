@@ -135,9 +135,9 @@ arquivo tutoriais\tutorial-3\frontend\src\App.js foi modificado para que seja po
       );
     }
    ```
-   8. Foi usado o Bootstrap para facilitar na construção da tela, as caixas de formularios são componentes
-   prontos para uso dentro do framework, que fornece varios exemplos de como construir telas com certa facilidade
-   usando apenas componentes já prontos. É possivel saber mais acessando: [React Bootstrap](https://react-bootstrap.netlify.app).
+7. Foi usado o Bootstrap para facilitar na construção da tela, as caixas de formularios são componentes
+prontos para uso dentro do framework, que fornece varios exemplos de como construir telas com certa facilidade
+usando apenas componentes já prontos. É possivel saber mais acessando: [React Bootstrap](https://react-bootstrap.netlify.app).
 
 ## Screenshot da aplicação
 ![image](https://github.com/es20232/eqp2/assets/40923082/179d3585-0778-4913-b483-9a308661312f)
