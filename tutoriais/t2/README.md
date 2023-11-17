@@ -21,7 +21,7 @@ O formulário inclui campos para o primeiro nome, sobrenome, nome de usuário, e
    ```
 Para acessar a aplicação no navegador, foi usado o URL http://localhost:3000
 Para verificar se tudo estava funcionando corretamente, a aplicação local foi aberta no navegador e o 
-arquivo tutoriais\tutorial-3\frontend\src\App.js foi modificado para que seja possível o efeito dessas modificações no navegador.
+arquivo tutoriais\t2\frontend\src\App.js foi modificado para que seja possível o efeito dessas modificações no navegador.
 
 5. Altere o codigo dentro de \App.js, cole esse codigo:
    ```
