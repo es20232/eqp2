@@ -24,20 +24,20 @@ Para verificar se tudo estava funcionando corretamente, a aplicação local foi 
 arquivo tutoriais\tutorial-3\frontend\src\App.js foi modificado para que seja possível o efeito dessas modificações no navegador.
 
 5. Altere o codigo dentro de \App.js, cole esse codigo:
-  ```
+   ```
     import React from "react";
     import FormularioT2 from "./FormularioT2";
-    
+       
     function App() {
       return (
-        <div>
-          <FormularioT2 />
-        </div>
-      );
+         <div>
+            <FormularioT2 />
+          </div>
+       );
     }
-    
-    export default App;
-  ```
+       
+     export default App;
+   ```
 6. Crie uma pasta chamada \componets, e crie uma arquivo chamado \FormularioT2.jsx, e cole esse codigo:
    ```
     import { useState } from "react";
