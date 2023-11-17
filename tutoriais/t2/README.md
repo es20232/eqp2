@@ -2,7 +2,7 @@
 ## Frontend
 1. Primeiro foi necessário navegar até o diretório de instalação do projeto do tutorial 2 através do comando:
    ```
-    cd tutoriais\t3
+    cd tutoriais\t2
    ```
 2. Posteriormente, foi usado o comando para criar a aplicação React do frontend:
    ```
