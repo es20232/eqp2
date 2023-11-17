@@ -1,5 +1,7 @@
 # Passo a passo de como foi feito esse tutorial
-## Frontend
+Este é um componente React que implementa um formulário de login simples usando o framework Bootstrap para o estilo.
+O formulário inclui campos para o primeiro nome, sobrenome, nome de usuário, e-mail e senha.
+## Instruções de Uso
 1. Primeiro foi necessário navegar até o diretório de instalação do projeto do tutorial 2 através do comando:
    ```
     cd tutoriais\t2
@@ -12,7 +14,7 @@
    ```
     npm install react-bootstrap bootstrap
    ```
-5. Para inicializar a aplicação foi utilizado o comando:
+4. Para inicializar a aplicação foi utilizado o comando:
    ```
     cd frontend
     npm start
@@ -21,7 +23,7 @@ Para acessar a aplicação no navegador, foi usado o URL http://localhost:3000
 Para verificar se tudo estava funcionando corretamente, a aplicação local foi aberta no navegador e o 
 arquivo tutoriais\tutorial-3\frontend\src\App.js foi modificado para que seja possível o efeito dessas modificações no navegador.
 
-6. Altere o codigo dentro de \App.js, cole esse codigo:
+5. Altere o codigo dentro de \App.js, cole esse codigo:
   ```
     import React from "react";
     import FormularioT2 from "./FormularioT2";
@@ -36,7 +38,7 @@ arquivo tutoriais\tutorial-3\frontend\src\App.js foi modificado para que seja po
     
     export default App;
   ```
-7. Crie uma pasta chamada \componets, e crie uma arquivo chamado \FormularioT2.jsx, e cole esse codigo:
+6. Crie uma pasta chamada \componets, e crie uma arquivo chamado \FormularioT2.jsx, e cole esse codigo:
    ```
     import { useState } from "react";
     import Button from "react-bootstrap/Button";
