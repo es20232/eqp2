@@ -8,7 +8,7 @@ O projeto está organizado da seguinte maneira:
 - backend: Contém o código do Django para o backend do aplicativo.
 - frontend: Contém o código do React para o frontend do aplicativo.
 - myapi: Contém APIs adicionais desenvolvidas usando o Django Rest Framework.
-- 
+  
 ## Configuração do Backend 🚀
 A pasta backend contém toda a lógica do servidor Django. Para configurar o ambiente, siga as etapas abaixo:
 
