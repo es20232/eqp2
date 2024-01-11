@@ -1,6 +1,8 @@
 # Mini Instagram Project (InstaTwo) 📸
 Este é um projeto simples de Mini Instagram com frontend em React.js, utilizando Axios para requisições HTTP e Bootstrap para estilização. O backend é construído com Django e Django Rest Framework para criar uma API.
 
+![image](https://github.com/es20232/eqp2/assets/40923082/cda08bc9-7f52-43b6-89ff-f5afb2d26da5)
+
 ## Frontend (React.js) 🌐
 ### Requisitos 🛠️
 Certifique-se de ter o Node.js e o npm instalados no seu sistema.
