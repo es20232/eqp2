@@ -48,6 +48,6 @@ python manage.py createsuperuser
 ```
 - Inicie o Servidor do Django:
 ```
-python manage.py runserver 8080
+python manage.py runserver
 ```
 O backend estará disponível em http://localhost:8000.
