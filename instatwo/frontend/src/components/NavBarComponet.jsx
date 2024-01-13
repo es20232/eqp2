@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Navbar, Container, Form, Row, Col } from "react-bootstrap";
+import { Navbar, Container, Row, Col } from "react-bootstrap";
 import ProfileImage from "./ProfileImage"; // Substitua pelo caminho real do seu componente
 
 function NavBarComponent() {

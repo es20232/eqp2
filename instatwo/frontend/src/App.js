@@ -1,9 +1,9 @@
-import NavBarComponet from './components/NavBarComponet.jsx';
+import ProfileScreen from "./pages/ProfileScreen/ProfileScreen.jsx";
 
 function App() {
   return (
     <>
-      <NavBarComponet></NavBarComponet>
+      <ProfileScreen></ProfileScreen>
     </>
   );
 }
