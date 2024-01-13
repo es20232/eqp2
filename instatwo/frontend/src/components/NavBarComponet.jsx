@@ -38,12 +38,12 @@ function NavBarComponent() {
             InstaTwo
           </Navbar.Brand>
           <Row
-            className="align-items-center no-gutters m-0"
+            className="align-items-center no-gutters p-0 m-0"
             style={rowStyle}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <Col xs="auto">
+            <Col xs="auto" className="p-0 m-0">
               <Navbar.Brand
                 href="#home"
                 style={{ color: "white", fontSize: "18px" }}
@@ -51,7 +51,7 @@ function NavBarComponent() {
                 Meu Perfil
               </Navbar.Brand>
             </Col>
-            <Col xs="auto">
+            <Col xs="auto" className="p-0 m-0">
               <Navbar.Brand>
                 <ProfileImage
                   imageURL="https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
