@@ -4,13 +4,18 @@ import { Navbar, Container, Row, Col } from "react-bootstrap";
 import ProfileImage from "./ProfileImage"; // Substitua pelo caminho real do seu componente
 
 function NavBarComponent() {
+
+  let color_fundo = "#13293d";
+  let color_texto = "white";
+  let color_hover = "#006494";
+
   const navbarStyle = {
-    backgroundColor: "#13293d", // Cor de fundo
+    backgroundColor: color_fundo, // Cor de fundo
     color: "white", // Cor do texto
   };
 
   const logoStyle = {
-    color: "white", // Cor do texto
+    color: color_texto, // Cor do texto
     fontSize: "30px", // Tamanho da fonte
   };
 
@@ -25,7 +30,7 @@ function NavBarComponent() {
   };
 
   const rowStyle = {
-    backgroundColor: isHovered ? "#006494" : "transparent", // Cor de fundo quando hover
+    backgroundColor: isHovered ? color_hover : "transparent", // Cor de fundo quando hover
     transition: "background-color 0.3s ease-in-out", // Efeito de transição suave
     cursor: "pointer", // Altera o cursor ao passar o mouse
   };
