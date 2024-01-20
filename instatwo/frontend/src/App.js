@@ -1,9 +1,9 @@
-import ProfileScreen from "./pages/ProfileScreen/ProfileScreen.jsx";
+import EditProfileScreen from "./pages/EditProfileScreen/EditProfileScreen";
 
 function App() {
   return (
     <>
-      <ProfileScreen></ProfileScreen>
+      <EditProfileScreen/>
     </>
   );
 }
