@@ -1,27 +1,27 @@
 import React from "react";
-import NavBarComponent from "../../components/NavBarComponet";
+import NavBarComponent from "../../components/NavBarComponent";
 import { Container, Row, Col } from "react-bootstrap";
 import ProfileImage from "../../components/ProfileImage";
 import { FaEdit } from "react-icons/fa";
 
 const CircularIcon = () => {
-    return (
-      <div
-        style={{
-          marginTop: "-70px",
-          height: "80px", 
-          width: "80px", 
-          borderRadius: "50%", 
-          backgroundColor: "#999999",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <FaEdit size={26} color="white" />
-      </div>
-    );
-  };
+  return (
+    <div
+      style={{
+        marginTop: "-70px",
+        height: "80px",
+        width: "80px",
+        borderRadius: "50%",
+        backgroundColor: "#999999",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <FaEdit size={26} color="white" />
+    </div>
+  );
+};
 
 export default function EditProfileScreen() {
   return (

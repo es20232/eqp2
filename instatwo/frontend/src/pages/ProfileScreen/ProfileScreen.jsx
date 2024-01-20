@@ -1,8 +1,7 @@
 import React from "react";
-import NavBarComponent from "../../components/NavBarComponet";
+import NavBarComponent from "../../components/NavBarComponent";
 import { Container } from "react-bootstrap";
 import UserInformation from "./UserInformation";
-
 
 function ProfileScreen() {
   return (

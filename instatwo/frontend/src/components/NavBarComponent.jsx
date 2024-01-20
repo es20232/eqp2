@@ -17,6 +17,7 @@ function NavBarComponent() {
   const logoStyle = {
     color: color_texto, // Cor do texto
     fontSize: "30px", // Tamanho da fonte
+    fontWeight: "bold", // Negrito
   };
 
   const [isHovered, setIsHovered] = useState(false);
