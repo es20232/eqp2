@@ -38,7 +38,7 @@ function NavBarComponent() {
 
   return (
     <div>
-      <Navbar className="justify-content-between" style={navbarStyle}>
+      <Navbar className="justify-content-between fixed-top" style={navbarStyle}>
         <Container>
           <Navbar.Brand href="#home" style={logoStyle}>
             InstaTwo

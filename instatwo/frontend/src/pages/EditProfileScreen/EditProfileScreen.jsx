@@ -22,7 +22,7 @@ const CircularIcon = () => {
         justifyContent: "center",
       }}
     >
-      <FaEdit size={26} color="white" />
+      <FaEdit size={26} color="#4d4d4d" />
     </div>
   );
 };
