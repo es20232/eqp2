@@ -3,10 +3,12 @@ import { Container, Row, Col } from "react-bootstrap";
 import ContainerComponent from "../../components/ContainerComponent";
 import InputFormComponent from "../../components/InputFormComponent";
 import ButtonComponent from "../../components/ButtonComponent";
+import NavBarComponent from "../../components/NavBarComponent";
 
 export default function RegisterScreen() {
   return (
     <>
+    <NavBarComponent></NavBarComponent>
       <Container
         fluid
         className="d-flex align-items-center justify-content-center vh-100"
