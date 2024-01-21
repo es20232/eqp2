@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import { Form } from "react-bootstrap";
 
+// colocar cor na label
 function InputFormComponent(props) {
   const [inputValue, setInputValue] = useState("");
 
@@ -11,7 +12,12 @@ function InputFormComponent(props) {
   return (
     <>
       <Form.Group className="mb-3">
-        <Form.Label>{props.label || "Nome de usuário"}</Form.Label>
+        <Form.Label
+          style={{
+            color: "#4d4d4d",
+            fontWeight: "Bold",
+          }}
+        >{props.label || "Nome de usuário"}</Form.Label>
         <Form.Control
           type={props.type || "text"}
           placeholder={props.placeholder || ""}

@@ -34,9 +34,9 @@ function LoginScreen() {
         <div style={center_container}>
           <div style={content}>
             <h1 style={{ color: props.colorLogoTitle, fontSize: "45px" }}>
-              <img src={img02} style={{ width: "180px", height: "40px" }} />
+              <img src={props.img02} style={{ width: "180px", height: "40px" }} />
             </h1>
-            <p style={{ color: props.colorTextBelowTitle }}>
+            <p style={{ color: props.colorTextBelowTitle, fontWeight:"bold"}}>
               Uma rede social para <br /> você e seus amigos.
             </p>
           </div>
@@ -59,6 +59,7 @@ function LoginScreen() {
                 <Col className="justify-content-center align-items-center">
                   <LogoLoginScreen></LogoLoginScreen>
                   <TextAppLogin
+                    img02={img02}
                     colorLogoTitle="white"
                     colorTextBelowTitle="#6495b0"
                   ></TextAppLogin>
@@ -71,7 +72,7 @@ function LoginScreen() {
               colorBackground="#e6e6e6"
               content={
                 <Col className="justify-content-center align-items-center">
-                  <h1 style={{color:"#0d263d", fontWeight:"bold"}}>Entrar</h1>
+                  <h1 style={{color:"#0d263d", fontWeight:"Bold"}}>Entrar</h1>
                   <InputFormComponent
                     type="text"
                     label="Nome de usuário"
@@ -84,7 +85,7 @@ function LoginScreen() {
                   ></InputFormComponent>
                   <div className="mt-4" style={center_container}>
                     <div style={content}>
-                      <Button variant="link" style={{ color: "#267094" }}>
+                      <Button variant="link" style={{ color: "#267094"}}>
                         Esqueci a senha
                       </Button>
                     </div>
@@ -93,6 +94,7 @@ function LoginScreen() {
                     <Col xs="auto">
                       <ButtonComponent
                         buttonColor="#4d4d4d"
+                        textColor="white"
                         text="Cadastre-se"
                       ></ButtonComponent>
                     </Col>
