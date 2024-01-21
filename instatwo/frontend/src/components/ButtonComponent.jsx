@@ -6,10 +6,11 @@ export default function ButtonComponent(props) {
 
   const buttonStyle = {
     color: textColor || "white",
-    backgroundColor: buttonColor || "#007bff",
+    backgroundColor: buttonColor || "#267094",
     borderColor: buttonColor || "transparent",
     width: size || "120px",
     height: "40px",
+    fontWeight: "bold",
     transition: "opacity 0.4s ease", // Adicionando transição de opacidade
   };
 
@@ -27,3 +28,4 @@ export default function ButtonComponent(props) {
     </>
   );
 }
+
