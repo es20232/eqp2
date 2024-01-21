@@ -47,7 +47,7 @@ function NavBarComponent() {
           </Navbar.Brand>
 
           <Nav className="me-auto">
-            <Nav.Link to="/auth/login" style={{color: 'white'}}>Entrar</Nav.Link>
+            <Nav.Link href="/auth/login" style={{color: 'white'}}>Entrar</Nav.Link>
             <Nav.Link to={''} style={{color: 'white'}}>Cadastre-se</Nav.Link>
           </Nav>
 

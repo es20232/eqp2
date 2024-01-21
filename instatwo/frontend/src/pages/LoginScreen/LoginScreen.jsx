@@ -5,6 +5,7 @@ import InputFormComponent from "../../components/InputFormComponent";
 import ButtonComponent from "../../components/ButtonComponent";
 import img01 from "../../images/img01.png";
 import img02 from "../../images/img02.png";
+import NavBarComponent from "../../components/NavBarComponent";
 
 function LoginScreen() {
   const center_container = {
@@ -47,6 +48,7 @@ function LoginScreen() {
 
   return (
     <>
+    <NavBarComponent></NavBarComponent>
       <Container fluid>
         <Row
           className="justify-content-center align-items-center"
