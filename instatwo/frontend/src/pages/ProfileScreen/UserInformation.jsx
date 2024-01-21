@@ -53,12 +53,22 @@ function UserInformation() {
             <Col className="d-flex flex-column align-items-center justify-content-center">
               <h1>1243</h1>
               <p>seguidores</p>
-              <ButtonComponent text="sair" buttonColor="#999999" />
+              <ButtonComponent
+                sizeRound="10px"
+                isRound={true}
+                text="sair"
+                buttonColor="#999999"
+              />
             </Col>
             <Col className="d-flex flex-column align-items-center justify-content-center">
               <h1>567</h1>
               <p>seguindo</p>
-              <ButtonComponent text="editar" />
+              <ButtonComponent
+                sizeRound="10px"
+                isRound={true}
+                text="editar"
+                to="/profile/edit"
+              />
             </Col>
           </Row>
         </Col>

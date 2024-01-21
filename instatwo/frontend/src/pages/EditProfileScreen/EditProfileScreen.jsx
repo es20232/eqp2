@@ -53,29 +53,34 @@ export default function EditProfileScreen() {
     <div>
       <NavBarComponent></NavBarComponent>
       <Container className="d-flex justify-content-center align-items-center">
-        <div style={{marginTop: '4rem'}}>
-        <ContainerComponent
-          colorBackground="#e6e6e6"
-          height="32rem"
-          content={
-            <Col className="align-items-center">
-              <ImageProfileEdit />
-              <InputFormComponent
-                type="text"
-                label="Novo Nome"
-                placeholder="Digite o novo nome..."
-              ></InputFormComponent>
-              <InputFormComponent
-                type="text"
-                label="Nova Bio"
-                placeholder="Digite a nova bio..."
-              ></InputFormComponent>
-              <Row className="d-flex justify-content-center mt-4">
-                <ButtonComponent textColor="white" text="Salvar" />
-              </Row>
-            </Col>
-          }
-        />
+        <div style={{ marginTop: "4rem" }}>
+          <ContainerComponent
+            colorBackground="#e6e6e6"
+            height="32rem"
+            content={
+              <Col className="align-items-center">
+                <ImageProfileEdit />
+                <InputFormComponent
+                  type="text"
+                  label="Novo Nome"
+                  placeholder="Digite o novo nome..."
+                ></InputFormComponent>
+                <InputFormComponent
+                  type="text"
+                  label="Nova Bio"
+                  placeholder="Digite a nova bio..."
+                ></InputFormComponent>
+                <Row className="d-flex justify-content-center mt-4">
+                  <ButtonComponent
+                    textColor="white"
+                    text="Salvar"
+                    sizeRound="10px"
+                    isRound={true}
+                  />
+                </Row>
+              </Col>
+            }
+          />
         </div>
       </Container>
     </div>

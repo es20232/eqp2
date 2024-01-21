@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { Navbar, Container, Row, Col } from "react-bootstrap";
+import { Navbar, Container, Row, Col, Nav } from "react-bootstrap";
 import { FaPlus } from "react-icons/fa";
 import ProfileImage from "./ProfileImage"; // Substitua pelo caminho real do seu componente
 import ButtonComponent from "./ButtonComponent"; // Substitua pelo caminho real do seu componente
+import { Link } from "react-router-dom";
 
 function NavBarComponent() {
   let color_fundo = "#13293d";
@@ -44,6 +45,11 @@ function NavBarComponent() {
           <Navbar.Brand href="#home" style={logoStyle}>
             InstaTwo
           </Navbar.Brand>
+
+          <Nav className="me-auto">
+            <Nav.Link to="/auth/login" style={{color: 'white'}}>Entrar</Nav.Link>
+            <Nav.Link to={''} style={{color: 'white'}}>Cadastre-se</Nav.Link>
+          </Nav>
 
           <Row>
             <Col xs="auto" className="d-flex align-items-center">
