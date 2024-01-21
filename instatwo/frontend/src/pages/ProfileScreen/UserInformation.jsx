@@ -43,7 +43,7 @@ function UserInformation() {
           />
         </Col>
         <Col xs="auto" style={{ maxWidth: "400px", maxHeight: "100px" }}>
-          <h1 style={{ color:"#4d4d4d", fontWeight:"bold "}}>Nome</h1>
+          <h1 style={{ color:"#0d263d", fontWeight:"bold "}}>Nome</h1>
           <p style={{ color: "#999999", fontWeight:"normal" }}>@Nick</p>
           <LimitedText text={loremIpsum} limit={100} />
         </Col>

@@ -53,7 +53,7 @@ export default function EditProfileScreen() {
     <div>
       <NavBarComponent></NavBarComponent>
       <Container className="d-flex justify-content-center align-items-center">
-        <div style={{ marginTop: "4rem" }}>
+        <div style={{ marginTop: "8rem" }}>
           <ContainerComponent
             colorBackground="#e6e6e6"
             height="32rem"
@@ -70,13 +70,15 @@ export default function EditProfileScreen() {
                   label="Nova Bio"
                   placeholder="Digite a nova bio..."
                 ></InputFormComponent>
-                <Row className="d-flex justify-content-center mt-4">
-                  <ButtonComponent
-                    textColor="white"
-                    text="Salvar"
-                    sizeRound="10px"
-                    isRound={true}
-                  />
+                <Row>
+                  <Col className="d-flex justify-content-center mt-2">
+                    <ButtonComponent
+                      textColor="white"
+                      text="Salvar"
+                      sizeRound="8px"
+                      isRound={true}
+                    />
+                  </Col>
                 </Row>
               </Col>
             }
