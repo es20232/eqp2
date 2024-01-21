@@ -6,6 +6,7 @@ import ButtonComponent from "../../components/ButtonComponent";
 import img01 from "../../images/img01.png";
 import img02 from "../../images/img02.png";
 import NavBarComponent from "../../components/NavBarComponent";
+import { Link } from "react-router-dom";
 
 function LoginScreen() {
   const center_container = {
@@ -92,6 +93,10 @@ function LoginScreen() {
                       <Button variant="link" style={{ color: "#267094"}}>
                         Esqueci a senha
                       </Button>
+                      <Link to="/auth/register">
+                      <Button variant="link" style={{ color: "#267094"}}>
+                        Cadastre-se
+                      </Button></Link>
                     </div>
                   </div>
                   <Row className="d-flex justify-content-center align-items-center mt-3">

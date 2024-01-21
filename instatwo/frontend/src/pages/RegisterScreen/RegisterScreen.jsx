@@ -25,7 +25,10 @@ export default function RegisterScreen() {
                     label="Nome"
                     placeholder="Digite seu nome..."
                   ></InputFormComponent>
-                  <InputFormComponent label="Nome de usuário"></InputFormComponent>
+                  <InputFormComponent
+                    label="Nome de usuário"
+                    placeholder='Digite seu nome de usuário...'
+                  ></InputFormComponent>
                   <InputFormComponent
                     label="E-mail"
                     placeholder="Digite seu e-mail..."
