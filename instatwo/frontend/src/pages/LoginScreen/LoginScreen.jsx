@@ -3,6 +3,7 @@ import ContainerComponent from "../../components/ContainerComponent";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import InputFormComponent from "../../components/InputFormComponent";
 import ButtonComponent from "../../components/ButtonComponent";
+import img01 from "../../images/img01.png";
 
 function LoginScreen() {
   const center_container = {
@@ -20,8 +21,8 @@ function LoginScreen() {
     return (
       <>
         <Container
-          style={{ background: "gray", width: "180px", height: "220px" }}
-        ></Container>
+          style={{ backgroundImage: img01, width: "180px", height: "220px" }}
+        > <img src={img01}/> </Container>
       </>
     );
   }
