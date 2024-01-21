@@ -1,15 +1,12 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 # Create your models here.
 def upload_path(instance, filename):
     return '/'.join(['media', str(instance.id_post.id.post), filename])
-
-class User(models.Model):
-    id_user = models.IntegerField()
-    username = models.CharField(max_length=50)
-    birthdate = models.DateField()
-    email = models.EmailField()
-    password = models.TextField()
 
 class Post(models.Model):
     id_post = models.IntegerField()
