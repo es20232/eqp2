@@ -101,13 +101,16 @@ function LoginScreen() {
                         buttonColor="#4d4d4d"
                         textColor="white"
                         text="Cadastre-se"
-                        sizeRound="10px"
+                        sizeRound="8px"
                         isRound={true}
                       ></ButtonComponent>
                     </Col>
                     <Col xs="auto">
-                      <ButtonComponent text="Entrar" sizeRound="10px"
-                        isRound={true}></ButtonComponent>
+                      <ButtonComponent
+                        text="Entrar"
+                        sizeRound="8px"
+                        isRound={true}
+                      ></ButtonComponent>
                     </Col>
                   </Row>
                 </Col>
