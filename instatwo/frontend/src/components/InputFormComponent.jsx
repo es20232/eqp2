@@ -14,7 +14,7 @@ function InputFormComponent(props) {
         <Form.Label>{props.label || "Nome de usuário"}</Form.Label>
         <Form.Control
           type={props.type || "text"}
-          placeholder={props.placeholder || "Digite seu nome de usuario..."}
+          placeholder={props.placeholder || ""}
           value={props.value || inputValue}
           onChange={props.onChange || handleChange}
           style={{

@@ -4,6 +4,7 @@ import { Row, Col, Container, Button } from "react-bootstrap";
 import InputFormComponent from "../../components/InputFormComponent";
 import ButtonComponent from "../../components/ButtonComponent";
 import img01 from "../../images/img01.png";
+import img02 from "../../images/img02.png";
 
 function LoginScreen() {
   const center_container = {
@@ -20,9 +21,9 @@ function LoginScreen() {
   function LogoLoginScreen() {
     return (
       <>
-        <Container
-          style={{ backgroundImage: img01, width: "180px", height: "220px" }}
-        > <img src={img01}/> </Container>
+        <Container style={{ width: "240px", height: "220px" }}>
+          <img src={img01}/>
+        </Container>
       </>
     );
   }
@@ -33,7 +34,7 @@ function LoginScreen() {
         <div style={center_container}>
           <div style={content}>
             <h1 style={{ color: props.colorLogoTitle, fontSize: "45px" }}>
-              InstaTwo
+              <img src={img02} style={{ width: "180px", height: "40px" }} />
             </h1>
             <p style={{ color: props.colorTextBelowTitle }}>
               Uma rede social para <br /> você e seus amigos.
@@ -70,11 +71,16 @@ function LoginScreen() {
               colorBackground="#e6e6e6"
               content={
                 <Col className="justify-content-center align-items-center">
-                  <h1>Entrar</h1>
-                  <InputFormComponent></InputFormComponent>
+                  <h1 style={{color:"#0d263d", fontWeight:"bold"}}>Entrar</h1>
+                  <InputFormComponent
+                    type="text"
+                    label="Nome de usuário"
+                    placeholder="Digite seu nome de usuário..."
+                  ></InputFormComponent>
                   <InputFormComponent
                     type="password"
                     label="Senha"
+                    placeholder="Digite sua senha..."
                   ></InputFormComponent>
                   <div className="mt-4" style={center_container}>
                     <div style={content}>
@@ -87,7 +93,7 @@ function LoginScreen() {
                     <Col xs="auto">
                       <ButtonComponent
                         buttonColor="#4d4d4d"
-                        text="Cadastre-Se"
+                        text="Cadastre-se"
                       ></ButtonComponent>
                     </Col>
                     <Col xs="auto">
