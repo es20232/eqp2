@@ -18,7 +18,7 @@ export default function RegisterScreen() {
               height="36rem"
               content={
                 <>
-                  <h1 style={{ color: "#6495b0" }}>Cadastrar-se</h1>
+                  <h1 style={{ color: "#0d263d" }}>Cadastre-se</h1>
                   <InputFormComponent
                     label="Nome"
                     placeholder="Digite seu nome..."
@@ -40,7 +40,7 @@ export default function RegisterScreen() {
                     type="password"
                   ></InputFormComponent>
                   <Row className="d-flex justify-content-center mt-4">
-                  <ButtonComponent text="Cadastrar" buttonColor="#6495b0"></ButtonComponent>
+                  <ButtonComponent text="Cadastrar" buttonColor="#267094"></ButtonComponent>
                   </Row>
                 </>
               }
