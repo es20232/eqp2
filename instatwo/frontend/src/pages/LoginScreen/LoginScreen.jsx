@@ -18,11 +18,11 @@ function LoginScreen() {
     textAlign: "center",
   };
 
-  function LogoLoginScreen() {
+  function LogoLoginScreen(props) {
     return (
       <>
         <Container style={{ width: "240px", height: "220px" }}>
-          <img src={img01}/>
+          <img src={props.img01}/>
         </Container>
       </>
     );
@@ -57,7 +57,9 @@ function LoginScreen() {
               colorBackground="#13293d"
               content={
                 <Col className="justify-content-center align-items-center">
-                  <LogoLoginScreen></LogoLoginScreen>
+                  <LogoLoginScreen
+                  img01={img01}
+                  ></LogoLoginScreen>
                   <TextAppLogin
                     img02={img02}
                     colorLogoTitle="white"
