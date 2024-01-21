@@ -93,10 +93,6 @@ function LoginScreen() {
                       <Button variant="link" style={{ color: "#267094"}}>
                         Esqueci a senha
                       </Button>
-                      <Link to="/auth/register">
-                      <Button variant="link" style={{ color: "#267094"}}>
-                        Cadastre-se
-                      </Button></Link>
                     </div>
                   </div>
                   <Row className="d-flex justify-content-center align-items-center mt-3">

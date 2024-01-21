@@ -12,7 +12,7 @@ const LimitedText = ({ text, limit }) => {
 
   return (
     <div>
-      <p className={isExpanded ? "" : "text-truncate"}>
+      <p className={isExpanded ? "" : "text-truncate"} style={{ color: "#4d4d4d", fontWeight:"lighter" }}>
         {isExpanded ? text : `${text.slice(0, limit)}...`}
       </p>
       {isExpanded ? (
@@ -43,30 +43,30 @@ function UserInformation() {
           />
         </Col>
         <Col xs="auto" style={{ maxWidth: "400px", maxHeight: "100px" }}>
-          <h1>Nome</h1>
-          <p style={{ color: "#cccccc" }}>@Nick</p>
+          <h1 style={{ color:"#4d4d4d", fontWeight:"bold "}}>Nome</h1>
+          <p style={{ color: "#999999", fontWeight:"normal" }}>@Nick</p>
           <LimitedText text={loremIpsum} limit={100} />
         </Col>
 
         <Col>
           <Row>
             <Col className="d-flex flex-column align-items-center justify-content-center">
-              <h1>1243</h1>
-              <p>seguidores</p>
+              <h1 style={{ color:"#4d4d4d", fontWeight:"bold "}}>123</h1>
+              <p style={{ color:"#4d4d4d", fontWeight:"bold "}}>Seguidores</p>
               <ButtonComponent
-                sizeRound="10px"
+                sizeRound="8px"
                 isRound={true}
-                text="sair"
-                buttonColor="#999999"
+                text="Sair"
+                buttonColor="#4d4d4d"
               />
             </Col>
             <Col className="d-flex flex-column align-items-center justify-content-center">
-              <h1>567</h1>
-              <p>seguindo</p>
+              <h1 style={{ color:"#4d4d4d", fontWeight:"bold "}}>567</h1>
+              <p style={{ color:"#4d4d4d", fontWeight:"bold "}}>Seguindo</p>
               <ButtonComponent
-                sizeRound="10px"
+                sizeRound="8px"
                 isRound={true}
-                text="editar"
+                text="Editar"
                 to="/profile/edit"
               />
             </Col>
