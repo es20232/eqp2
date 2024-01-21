@@ -52,6 +52,7 @@ function NavBarComponent() {
               text={<FaPlus/>}
               size="48px"
               isRound={'true'}
+              sizeRound="50%"
               buttonColor="#267094"
             />
             </Col>
