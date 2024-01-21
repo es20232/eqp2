@@ -8,8 +8,8 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
 
     def post(self, request, *args, **kwargs):
-       media = request.data['media']
-       id_user = request.data['id_user']
-       id_post = request.data['id_post']
-       Post.objects.create(media=media, id_user=id_user, id_post=id_post)
-       return HttpResponse("Post created")
+        id_post = request.data['id_post']
+        media = request.data['media']
+        caption = request.data['caption']
+        Post.objects.create(id_post=id_post, media=media, caption=caption)
+        return HttpResponse("Post created", status=200)
