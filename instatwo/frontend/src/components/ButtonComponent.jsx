@@ -1,20 +1,24 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function ButtonComponent(props) {
-  const { size, textColor, buttonColor, variant, text, onClick } = props;
+  const { size, textColor, buttonColor, variant, text, onClick, isRound, sizeRound, to } = props;
 
   const buttonStyle = {
     color: textColor || "white",
-    backgroundColor: buttonColor || "#007bff",
+    backgroundColor: buttonColor || "#267094",
     borderColor: buttonColor || "transparent",
     width: size || "120px",
-    height: "40px",
+    height: isRound ? size || "40px" : "40px", // Ajuste para tornar o botão redondo
+    borderRadius: isRound ? sizeRound : "0", // Ajuste para tornar o botão redondo
+    fontWeight: "bold",
     transition: "opacity 0.4s ease", // Adicionando transição de opacidade
   };
 
   return (
     <>
+    <Link to={to}>
       <Button
         variant={variant || "primary"}
         style={buttonStyle}
@@ -24,6 +28,7 @@ export default function ButtonComponent(props) {
       >
         {text}
       </Button>
+    </Link>
     </>
   );
 }
