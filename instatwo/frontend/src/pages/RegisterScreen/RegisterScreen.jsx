@@ -8,7 +8,7 @@ import NavBarComponent from "../../components/NavBarComponent";
 export default function RegisterScreen() {
   return (
     <>
-    <NavBarComponent></NavBarComponent>
+      <NavBarComponent></NavBarComponent>
       <Container
         fluid
         className="d-flex align-items-center justify-content-center vh-100"
@@ -42,7 +42,12 @@ export default function RegisterScreen() {
                     type="password"
                   ></InputFormComponent>
                   <Row className="d-flex justify-content-center mt-4">
-                  <ButtonComponent text="Cadastrar" buttonColor="#267094"></ButtonComponent>
+                    <ButtonComponent
+                      sizeRound="10px"
+                      isRound={true}
+                      text="Cadastrar"
+                      buttonColor="#267094"
+                    ></ButtonComponent>
                   </Row>
                 </>
               }
