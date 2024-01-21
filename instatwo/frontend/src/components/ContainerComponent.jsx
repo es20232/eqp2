@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 
 function ContainerComponent(props) {
   const styleContainer = {
-    height: "25rem",
+    height: props.height || "25rem",
     width: "22rem",
     backgroundColor: props.colorBackground,
     borderRadius: "20px",
