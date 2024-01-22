@@ -17,7 +17,3 @@ class   LikeSerializer(serializers.ModelSerializer):
         model = Like
         fields = ['id_user', 'id_post']
     
-class   userSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id_user', 'username', 'birthdate', 'email', 'password']

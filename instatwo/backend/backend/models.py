@@ -1,12 +1,11 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from users.models import User
 
-
-User = get_user_model()
 
 # Create your models here.
 def upload_path(instance, filename):
     return '/'.join(['media', str(instance.id_post.id.post), filename])
+
 
 class Post(models.Model):
     id_post = models.IntegerField()
