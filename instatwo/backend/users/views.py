@@ -64,6 +64,29 @@ class UserView(APIView):
 
         return Response(serializer.data)
     
+class EditProfileView(APIView):
+    def post(self, request):
+        token = request.COOKIES.get('jwt')
+
+        if not token:
+            raise AuthenticationFailed('Não autorizado!')
+        
+        try:
+            payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('Não autorizado!')
+        
+        user = User.objects.filter(id=payload['id']).first()
+        
+        # Atualize os campos do usuário com base nos dados fornecidos no request.data
+        user.email = request.data.get('newEmail', user.email)
+        user.set_password(request.data.get('newPassword', user.password))
+        user.save()
+
+        # Retorne os dados atualizados do usuário
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+    
 class LogoutView(APIView):
 
     def post(self, request):
