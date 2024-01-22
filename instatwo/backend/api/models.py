@@ -1,28 +1,25 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
+from django.contrib.auth.tokens import default_token_generator
 
 # Create your models here.
-def upload_path(instance, filename):
-    return '/'.join(['post', str(instance.id_post), filename])
 
-class User(models.Model):
-    id_user = models.IntegerField()
-    username = models.CharField(max_length=50)
-    birthdate = models.DateField()
-    email = models.EmailField()
-    password = models.TextField()
+class User(AbstractUser):
+    birth_date = models.DateField(null=True, blank=True)
 
-class Post(models.Model):
-    id_post = models.IntegerField()
-    # id_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    media = models.ImageField(upload_to=upload_path, blank=True, null=True)
-    caption = models.TextField()
 
-class Comment(models.Model):
-    id_comment = models.IntegerField()
-    id_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    id_post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    text = models.TextField()
+class Token(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    token = models.CharField(max_length=100, unique=True)
+    expire_at = models.DateTimeField(auto_now_add=True)
+
+    def initialize(self):
+        self.token = default_token_generator.make_token(self.user)
+        self.set_expire_time()
+
+    def set_expire_time(self):
+        self.expire_at = timezone.now() + timezone.timedelta(minutes=30)
     
-class Like(models.Model):
-    id_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    id_post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    def is_expired(self) -> bool:
+        return timezone.now() > self.expire_at

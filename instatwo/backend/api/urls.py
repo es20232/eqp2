@@ -1,6 +1,10 @@
 from django.urls import path
-from rest_framework.routers import DefaultRouter
-from .views import PostViewSet
+from . import views
 
-post_router = DefaultRouter()
-post_router.register('posts', PostViewSet)
+urlpatterns = [
+    path('signin', views.signin, name="signin"),
+    path('signout', views.signout, name="signout"),
+    path("reset_password", views.reset_password, name="reset_password"),
+    path("change_password", views.change_password, name="change_password"),
+    path("create_user", views.create_user_test, name="create_user_test")
+]
