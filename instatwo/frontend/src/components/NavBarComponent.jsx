@@ -56,7 +56,7 @@ function NavBarComponent() {
           </Nav>
 
           <Row>
-            <Col xs="auto" className="d-flex align-items-center">
+            {/* <Col xs="auto" className="d-flex align-items-center">
               <ButtonComponent
                 textColor="white"
                 text={<FaPlus />}
@@ -65,7 +65,7 @@ function NavBarComponent() {
                 sizeRound="50%"
                 buttonColor="#267094"
               />
-            </Col>
+            </Col> */}
 
             <Col xs="auto">
               <Link to="/profile" style={{textDecoration: 'none'}}>
