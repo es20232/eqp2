@@ -6,9 +6,14 @@ import ButtonComponent from "../../components/ButtonComponent";
 import img01 from "../../images/img01.png";
 import img02 from "../../images/img02.png";
 import NavBarComponent from "../../components/NavBarComponent";
-import { Link } from "react-router-dom";
+import axios from "axios";
+
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
+axios.defaults.withCredentials = true;
 
 function LoginScreen() {
+
   const center_container = {
     display: "flex",
     alignItems: "center",
