@@ -47,47 +47,53 @@ function NavBarComponent() {
           </Navbar.Brand>
 
           <Nav className="me-auto">
-            <Nav.Link href="/auth/login" style={{color: 'white'}}>Entrar</Nav.Link>
-            <Nav.Link href="/auth/register" style={{color: 'white'}}>Cadastre-se</Nav.Link>
+            <Nav.Link href="/auth/login" style={{ color: "white" }}>
+              Entrar
+            </Nav.Link>
+            <Nav.Link href="/auth/register" style={{ color: "white" }}>
+              Cadastre-se
+            </Nav.Link>
           </Nav>
 
           <Row>
             <Col xs="auto" className="d-flex align-items-center">
-            <ButtonComponent
-              textColor="white"
-              text={<FaPlus/>}
-              size="48px"
-              isRound={'true'}
-              sizeRound="50%"
-              buttonColor="#267094"
-            />
+              <ButtonComponent
+                textColor="white"
+                text={<FaPlus />}
+                size="48px"
+                isRound={"true"}
+                sizeRound="50%"
+                buttonColor="#267094"
+              />
             </Col>
 
             <Col xs="auto">
-              <Row
-                className="align-items-center no-gutters p-0 m-0"
-                style={rowStyle}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Col xs="auto" className="p-0 m-0">
-                  <Navbar.Brand
-                    href="#home"
-                    style={{ color: "white", fontSize: "18px" }}
-                  >
-                    Meu Perfil
-                  </Navbar.Brand>
-                </Col>
-                <Col xs="auto" className="p-0 m-0">
-                  <Navbar.Brand>
-                    <ProfileImage
-                      imageURL="https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
-                      altText="Profile Image"
-                      size="45px" // Tamanho menor
-                    />
-                  </Navbar.Brand>
-                </Col>
-              </Row>
+              <Link to="/profile" style={{textDecoration: 'none'}}>
+                <Row
+                  className="align-items-center no-gutters p-0 m-0"
+                  style={rowStyle}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <Col xs="auto" className="p-0 m-0">
+                    <Navbar.Brand
+                      href="#home"
+                      style={{ color: "white", fontSize: "18px" }}
+                    >
+                      Meu Perfil
+                    </Navbar.Brand>
+                  </Col>
+                  <Col xs="auto" className="p-0 m-0">
+                    <Navbar.Brand>
+                      <ProfileImage
+                        imageURL="https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
+                        altText="Profile Image"
+                        size="45px" // Tamanho menor
+                      />
+                    </Navbar.Brand>
+                  </Col>
+                </Row>
+              </Link>
             </Col>
           </Row>
         </Container>
