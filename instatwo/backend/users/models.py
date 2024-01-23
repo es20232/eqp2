@@ -7,11 +7,27 @@ class User(AbstractUser):
     password = models.CharField(max_length=255)
     email = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
+    birth_date = models.DateField(null=True, blank=True)
+    bio = models.CharField(max_length=256, null=True, blank=True)
+    profile_img = models.CharField(max_length=256)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = UserManager()
 
+class Token(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    token = models.CharField(max_length=100, unique=True)
+    expire_at = models.DateTimeField(auto_now_add=True)
 
-# Create your models here.
+    def initialize(self):
+        self.token = default_token_generator.make_token(self.user)
+        self.set_expire_time()
+
+    def set_expire_time(self):
+        self.expire_at = timezone.now() + timezone.timedelta(minutes=30)
+    
+    def is_expired(self) -> bool:
+        return timezone.now() > self.expire_at
+

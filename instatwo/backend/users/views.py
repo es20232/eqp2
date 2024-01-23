@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from .serializers import UserSerializer
-from .models import User
+from .models import User, Token
 import jwt, datetime
 
 
@@ -97,3 +97,39 @@ class LogoutView(APIView):
         }
         
         return response
+
+class ResetPassword(APIView):
+
+    def post(self, request):
+        user = User.objects.filter(username=request.data["username"]).first()
+        if user is None:
+            response = Response()
+            response.data = {'message' : "Usuário não encontrado"}
+            return response
+        else:
+            token = Token(user=user)
+            token.initialize()
+            Token.objects.update_or_create(user=user, defaults={"token": token.token, "expire_at": token.expire_at})
+            send_email.reset_password(token)
+            response = Response()
+            response.data = {'message' : "Token enviado para seu email"}
+            return response
+
+class ChangePassword(APIView):
+
+    def post(self, request):
+        sent_token = request.data["token"]
+        new_password = request.data["password"]
+
+        token = Token.objects.filter(token=sent_token).first()
+
+        if token is None:
+            reponse = Response()
+            reponse.data = {"message" : "Token inválido"}
+            return response
+        else:
+            user = token.user
+            user.set_password(new_password)
+            response = Response()
+            response.data = {"message" : "Senha alterada!"}
+            return response
