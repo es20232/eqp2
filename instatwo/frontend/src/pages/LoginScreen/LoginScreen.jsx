@@ -126,7 +126,7 @@ function LoginScreen() {
                   ></InputFormComponent>
                   <div className="mt-4" style={center_container}>
                     <div style={content}>
-                      <Button variant="link" style={{ color: "#267094" }}>
+                      <Button href="/refresh" variant="link" style={{ color: "#267094" }}>
                         Esqueci a senha
                       </Button>
                     </div>

@@ -7,23 +7,6 @@ import axios from "axios";
 import { useState } from "react";
 
 export default function RefreshScreen() {
-  const [username, setUsername] = useState("");
-
-  const handleSendUsername = async () => {
-    try {
-      const response = await axios.post(
-        `http://localhost:8080/api/reset-password`,
-        {
-          username: username,
-        }
-      );
-
-      console.log(response.data);
-    } catch (error) {
-      console.error("Erro ao enviar e-mail:", error);
-    }
-  };
-
   return (
     <>
       <Container
@@ -38,17 +21,21 @@ export default function RefreshScreen() {
               width="23rem"
               content={
                 <>
-                  <h1 style={{ color: "#6495b0" }}>Recuperar Senha</h1>
-                  <p>
-                    Iremos mandar um e-mail com um link para recuperar sua
-                    senha.
-                  </p>
+                  <h1 style={{ color: "#6495b0" }}>Mude sua senha</h1>
+                  
                   <InputFormComponent
                     label="Username"
                     placeholder="Digite seu username..."
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                  ></InputFormComponent>
+                  <InputFormComponent
+                    label="Senha"
+                    placeholder="Digite sua nova senha..."
+                    type="password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
                   ></InputFormComponent>
                   <Row className="d-flex justify-content-center mt-4">
                     <ButtonComponent

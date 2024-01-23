@@ -7,6 +7,7 @@ import ProfileScreen from "./pages/ProfileScreen/ProfileScreen";
 import EditProfileScreen from "./pages/EditProfileScreen/EditProfileScreen";
 import RegisterScreen from "./pages/RegisterScreen/RegisterScreen";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import RefreshScreen from "./pages/RefreshScreen/RefreshScreen";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/auth/register" element={<RegisterScreen/>} />
           <Route path="/profile" element={<ProfileScreen/>} />
           <Route path="/profile/edit" element={<EditProfileScreen/>} />
+          <Route path="/refresh" element={<RefreshScreen/>} />
         </Routes>
       </Router>
     </>
