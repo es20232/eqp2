@@ -5,6 +5,7 @@ def send_reset_password_email(token):
     url = f"https://{domain}/change_password/?token={token.token}"
     message = f"Acesse este link para mudar sua senha: {url}"
     
+    print(url)
     django_send_email(
         "Reset password request",
         message,
