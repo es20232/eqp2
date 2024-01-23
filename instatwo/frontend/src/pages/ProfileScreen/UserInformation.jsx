@@ -101,7 +101,7 @@ function UserInformation() {
           <LimitedText text={userData.bio ? userData.bio : bioInfo} limit={50} />
         </Col>
 
-        <Col>
+        <Col style={{marginLeft: "10rem"}}>
           <Row>
             <Col className="d-flex flex-column align-items-center justify-content-center">
               <h1 style={{ color: "#4d4d4d", fontWeight: "bold " }}>0</h1>
