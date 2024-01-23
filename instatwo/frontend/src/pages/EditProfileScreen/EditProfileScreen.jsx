@@ -29,13 +29,7 @@ const CircularIcon = (props) => {
         cursor: "pointer",
       }}
     >
-      <input
-        style={{ display: "none" }}
-        type="file"
-        accept="images/*"
-        onChange={""}
-      />
-      <FaEdit onClick={""} size={26} color="#4d4d4d" />
+      <FaEdit size={26} color="#4d4d4d" />
     </div>
   );
 };
@@ -62,7 +56,9 @@ const ImageProfileEdit = (props) => {
 };
 
 export default function EditProfileScreen() {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({
+    img: null, // Foto do usuário
+  });
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -110,6 +106,9 @@ export default function EditProfileScreen() {
       // Limpe os campos do formulário ou faça outras ações necessárias
       setNewEmail("");
       setNewPassword("");
+      setNewName("");
+      setNewBio("");
+      setNewUsername("");
 
       alert("Perfil editado com sucesso!");
 
