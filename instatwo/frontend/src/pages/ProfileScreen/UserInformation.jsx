@@ -93,7 +93,7 @@ function UserInformation() {
         </Col>
         <Col xs="auto" style={{ maxWidth: "400px", maxHeight: "100px" }}>
           <h1 style={{ color: "#0d263d", fontWeight: "bold " }}>
-            {userData.username}
+            {userData.name}
           </h1>
           <p style={{ color: "#999999", fontWeight: "normal" }}>
             @{userData.username}

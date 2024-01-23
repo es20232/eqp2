@@ -70,6 +70,7 @@ export default function EditProfileScreen() {
     const checkAuthentication = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/user");
+        setUserData(response.data);
         setLoading(false);
         setIsLoggedIn(true);
       } catch (error) {
@@ -97,9 +98,9 @@ export default function EditProfileScreen() {
         {
           newEmail,
           newPassword,
-          name: newName,
-          username: newUsername,
-          bio: newBio,
+          newName,
+          newBio,
+          newUsername,
         },
         {
           withCredentials: true, // Certifique-se de incluir cookies na solicitação
