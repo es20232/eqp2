@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,12 +20,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(s_dk4b%vyo9c4@29541^9txlq#%!_hgqpl&f@o2*m05b)v@zg'
+SECRET_KEY = 'django-insecure-u5%i(ya!g%)%+b4)%=xw$3@86uulw3ulg4e#d0y59465rsih##'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
+
+CORS_ALLOW_CREDENTIALS = True # new
 
 
 # Application definition
@@ -41,7 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'backend',
-    'api',
+    'users'
 ]
 
 MIDDLEWARE = [
@@ -56,10 +61,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'backend.urls'
-
-CORS_ORIGIN_WHITELIST = [
-     'http://localhost:3000'
-]
 
 TEMPLATES = [
     {
@@ -127,9 +128,20 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'medias')
-MEDIA_URL = '/medias/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'your-smtp-server.com'
+EMAIL_PORT = 587  # Use the appropriate port for your email provider
+EMAIL_USE_TLS = True  # Or use EMAIL_USE_SSL if your provider requires SSL
+EMAIL_HOST_USER = 'user@instatwo.com'
+EMAIL_HOST_PASSWORD = 'password'

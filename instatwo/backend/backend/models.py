@@ -1,20 +1,16 @@
 from django.db import models
+from users.models import User
+
 
 # Create your models here.
 def upload_path(instance, filename):
-    return '/'.join(['post', str(instance.id_post), filename])
+    return '/'.join(['media', str(instance.id_post.id.post), filename])
 
-class User(models.Model):
-    id_user = models.IntegerField()
-    username = models.CharField(max_length=50)
-    birthdate = models.DateField()
-    email = models.EmailField()
-    password = models.TextField()
 
 class Post(models.Model):
     id_post = models.IntegerField()
-    # id_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    media = models.ImageField(upload_to=upload_path, blank=True, null=True)
+    id_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    media = models.ImageField(upload_to='images/', blank=True, null=True)
     caption = models.TextField()
 
 class Comment(models.Model):

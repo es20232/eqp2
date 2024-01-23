@@ -1,12 +1,35 @@
 import React from "react";
 import { useState } from "react";
 import { Navbar, Container, Row, Col, Nav } from "react-bootstrap";
-import { FaPlus } from "react-icons/fa";
-import ProfileImage from "./ProfileImage"; // Substitua pelo caminho real do seu componente
-import ButtonComponent from "./ButtonComponent"; // Substitua pelo caminho real do seu componente
+// import { FaPlus } from "react-icons/fa";
+import ProfileImage from "./ProfileImage";
+// import ButtonComponent from "./ButtonComponent";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect } from "react";
 
 function NavBarComponent() {
+  const [userData, setUserData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/user");
+        setUserData(response.data);
+        setLoading(false);
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.error("Erro ao recuperar dados do usuário:", error);
+        setLoading(false);
+        setIsLoggedIn(false);
+      }
+    };
+
+    checkAuthentication();
+  }, []);
+
   let color_fundo = "#13293d";
   let color_texto = "white";
   let color_hover = "#006494";
@@ -46,48 +69,57 @@ function NavBarComponent() {
             InstaTwo
           </Navbar.Brand>
 
-          <Nav className="me-auto">
-            <Nav.Link href="/auth/login" style={{color: 'white'}}>Entrar</Nav.Link>
-            <Nav.Link href="/auth/register" style={{color: 'white'}}>Cadastre-se</Nav.Link>
-          </Nav>
-
           <Row>
-            <Col xs="auto" className="d-flex align-items-center">
-            <ButtonComponent
-              textColor="white"
-              text={<FaPlus/>}
-              size="48px"
-              isRound={'true'}
-              sizeRound="50%"
-              buttonColor="#267094"
-            />
-            </Col>
+            {/* <Col xs="auto" className="d-flex align-items-center">
+              <ButtonComponent
+                textColor="white"
+                text={<FaPlus />}
+                size="48px"
+                isRound={"true"}
+                sizeRound="50%"
+                buttonColor="#267094"
+              />
+            </Col> */}
 
             <Col xs="auto">
-              <Row
-                className="align-items-center no-gutters p-0 m-0"
-                style={rowStyle}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Col xs="auto" className="p-0 m-0">
-                  <Navbar.Brand
-                    href="#home"
-                    style={{ color: "white", fontSize: "18px" }}
+              {!isLoggedIn && (
+                <Nav className="me-auto">
+                <Nav.Link href="/auth/login" style={{ color: "white" }}>
+                  Entrar
+                </Nav.Link>
+                <Nav.Link href="/auth/register" style={{ color: "white" }}>
+                  Cadastre-se
+                </Nav.Link>
+              </Nav>
+              )}
+              {isLoggedIn && (
+                <Link to="/profile" style={{ textDecoration: "none" }}>
+                  <Row
+                    className="align-items-center no-gutters p-0 m-0"
+                    style={rowStyle}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                   >
-                    Meu Perfil
-                  </Navbar.Brand>
-                </Col>
-                <Col xs="auto" className="p-0 m-0">
-                  <Navbar.Brand>
-                    <ProfileImage
-                      imageURL="https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
-                      altText="Profile Image"
-                      size="45px" // Tamanho menor
-                    />
-                  </Navbar.Brand>
-                </Col>
-              </Row>
+                    <Col xs="auto" className="p-0 m-0">
+                      <Navbar.Brand
+                        href="#home"
+                        style={{ color: "white", fontSize: "18px" }}
+                      >
+                        {userData.username}
+                      </Navbar.Brand>
+                    </Col>
+                    <Col xs="auto" className="p-0 m-0">
+                      <Navbar.Brand>
+                        <ProfileImage
+                          imageURL="https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
+                          altText="Profile Image"
+                          size="45px" // Tamanho menor
+                        />
+                      </Navbar.Brand>
+                    </Col>
+                  </Row>
+                </Link>
+              )}
             </Col>
           </Row>
         </Container>

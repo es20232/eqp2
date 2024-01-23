@@ -1,7 +1,6 @@
 import { React, useState } from "react";
 import { Form } from "react-bootstrap";
 
-// colocar cor na label
 function InputFormComponent(props) {
   const [inputValue, setInputValue] = useState("");
 
@@ -34,4 +33,3 @@ function InputFormComponent(props) {
 }
 
 export default InputFormComponent;
-
