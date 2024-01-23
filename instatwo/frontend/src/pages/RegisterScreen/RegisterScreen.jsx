@@ -14,12 +14,19 @@ export default function RegisterScreen() {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [registerError, setRegisterError] = useState(null);
+  const [passwordMismatchError, setPasswordMismatchError] = useState(null);
   const [redirect, setRedirect] = useState(false);
 
   const handleRegister = async () => {
+    // Verifica se as senhas são diferentes
+    if (password !== repeatPassword) {
+      setPasswordMismatchError("As senhas não coincidem.");
+      return;
+    }
+
     try {
       const response = await axios.post("http://localhost:8080/api/register", {
-        // name: name,
+        name: name,
         username: username,
         email: email,
         password: password,
@@ -32,14 +39,16 @@ export default function RegisterScreen() {
       setEmail("");
       setPassword("");
       setRepeatPassword("");
+      setPasswordMismatchError("");
 
       // Exibe uma mensagem ou realiza alguma ação após o registro bem-sucedido.
       alert("Registro bem-sucedido!");
       setRedirect(true);
-
     } catch (error) {
       // Exibe mensagem de erro usando 'setRegisterError'.
-      setRegisterError(error.response ? error.response.data.message : "Erro ao registrar!");
+      setRegisterError(
+        error.response ? error.response.data.message : "Erro ao registrar!"
+      );
     }
   };
 
@@ -50,15 +59,20 @@ export default function RegisterScreen() {
   return (
     <>
       <NavBarComponent></NavBarComponent>
-      <Container fluid className="d-flex align-items-center justify-content-center vh-100">
+      <Container
+        fluid
+        className="d-flex align-items-center justify-content-center vh-100"
+      >
         <Row>
           <Col>
             <ContainerComponent
               colorBackground="#e6e6e6"
-              height="36rem"
+              height="38rem"
               content={
                 <>
-                  <h1 style={{ color: "#0d263d", fontWeight: "bold" }}>Cadastre-se</h1>
+                  <h1 style={{ color: "#0d263d", fontWeight: "bold" }}>
+                    Cadastre-se
+                  </h1>
                   <InputFormComponent
                     label="Nome"
                     placeholder="Digite seu nome..."
@@ -90,8 +104,14 @@ export default function RegisterScreen() {
                     placeholder="Digite sua senha novamente..."
                     type="password"
                     value={repeatPassword}
-                    onChange={(e) => setRepeatPassword(e.target.value)}
+                    onChange={(e) => {
+                      setRepeatPassword(e.target.value);
+                      setPasswordMismatchError("");
+                    }}
                   ></InputFormComponent>
+                  {passwordMismatchError && (
+                    <p style={{ color: "red" }}>{passwordMismatchError}</p>
+                  )}
                   {registerError && (
                     <p style={{ color: "red" }}>{registerError}</p>
                   )}
@@ -102,7 +122,7 @@ export default function RegisterScreen() {
                         isRound={true}
                         text="Cadastrar"
                         buttonColor="#267094"
-                        onClick={()=>handleRegister()}
+                        onClick={() => handleRegister()}
                       ></ButtonComponent>
                     </Col>
                   </Row>

@@ -103,7 +103,7 @@ function NavBarComponent() {
                   >
                     <Col xs="auto" className="p-0 m-0">
                       <Navbar.Brand
-                        href="#home"
+                        href="/profile"
                         style={{ color: "white", fontSize: "18px" }}
                       >
                         {userData.username}
@@ -112,7 +112,7 @@ function NavBarComponent() {
                     <Col xs="auto" className="p-0 m-0">
                       <Navbar.Brand>
                         <ProfileImage
-                          imageURL={!isLoggedIn ? profileIcon : userData.profileImageURL}
+                          imageURL={userData.img ? userData.img : profileIcon}
                           altText="Profile Image"
                           size="45px" // Tamanho menor
                         />

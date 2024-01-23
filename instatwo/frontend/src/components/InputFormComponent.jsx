@@ -16,8 +16,11 @@ function InputFormComponent(props) {
             color: "#4d4d4d",
             fontWeight: "Bold",
           }}
-        >{props.label || "Nome de usuário"}</Form.Label>
+        >
+          {props.label || "Nome de usuário"}
+        </Form.Label>
         <Form.Control
+          as={props.as || "input"}
           type={props.type || "text"}
           placeholder={props.placeholder || ""}
           value={props.value || inputValue}
