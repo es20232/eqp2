@@ -4,6 +4,7 @@ import ProfileImage from "../../components/ProfileImage";
 import ButtonComponent from "../../components/ButtonComponent";
 import axios from "axios";
 import AlertNoLogin from "../../AlertNoLogin";
+import profileIcon from "../../images/profile-icon-design-free-vector.jpg";
 
 const LimitedText = ({ text, limit }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -77,33 +78,33 @@ function UserInformation() {
     );
   }
 
-  const loremIpsum =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+  const bioInfo =
+    "Adicione uma foto sua e fale um pouco sobre você, o que gosta de fazer, quais são seus hobbies, etc. ";
 
   return (
     <Container fluid className="d-flex justify-content-center vh-90">
       <Row className="d-flex ">
         <Col xs="auto" style={{ marginRight: "40px" }}>
           <ProfileImage
-            imageURL="https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
+            imageURL={userData.img ? userData.img : profileIcon}
             altText="Profile Image"
             size="150px"
           />
         </Col>
         <Col xs="auto" style={{ maxWidth: "400px", maxHeight: "100px" }}>
           <h1 style={{ color: "#0d263d", fontWeight: "bold " }}>
-            {userData.username}
+            {userData.name}
           </h1>
           <p style={{ color: "#999999", fontWeight: "normal" }}>
             @{userData.username}
           </p>
-          <LimitedText text={loremIpsum} limit={100} />
+          <LimitedText text={userData.bio ? userData.bio : bioInfo} limit={50} />
         </Col>
 
-        <Col>
+        <Col style={{marginLeft: "10rem"}}>
           <Row>
             <Col className="d-flex flex-column align-items-center justify-content-center">
-              <h1 style={{ color: "#4d4d4d", fontWeight: "bold " }}>123</h1>
+              <h1 style={{ color: "#4d4d4d", fontWeight: "bold " }}>0</h1>
               <p style={{ color: "#4d4d4d", fontWeight: "bold " }}>
                 Seguidores
               </p>
@@ -116,7 +117,7 @@ function UserInformation() {
               />
             </Col>
             <Col className="d-flex flex-column align-items-center justify-content-center">
-              <h1 style={{ color: "#4d4d4d", fontWeight: "bold " }}>567</h1>
+              <h1 style={{ color: "#4d4d4d", fontWeight: "bold " }}>0</h1>
               <p style={{ color: "#4d4d4d", fontWeight: "bold " }}>Seguindo</p>
               <ButtonComponent
                 sizeRound="8px"

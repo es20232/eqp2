@@ -9,6 +9,8 @@ class User(AbstractUser):
     password = models.CharField(max_length=255)
     email = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
+    img = models.ImageField(upload_to='user_images/', null=True, blank=True)  # Assuming you want to store user images
+    bio = models.TextField(null=True, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

@@ -82,6 +82,10 @@ class EditProfileView(APIView):
         # Atualize os campos do usuário com base nos dados fornecidos no request.data
         user.email = request.data.get('newEmail', user.email)
         user.set_password(request.data.get('newPassword', user.password))
+        user.name = request.data.get('newName', user.name)
+        user.bio = request.data.get('newBio', user.bio)
+        user.img = request.data.get('newImg', user.img)
+        user.username = request.data.get('newUsername', user.username)
         user.save()
 
         # Retorne os dados atualizados do usuário

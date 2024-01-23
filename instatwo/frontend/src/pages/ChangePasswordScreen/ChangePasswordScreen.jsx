@@ -6,11 +6,14 @@ import ButtonComponent from "../../components/ButtonComponent";
 import axios from "axios";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function ChangePasswordScreen() {
   const [username, setUsername] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
   const [tokenstr, setTokenstr] = React.useState("");
+
+  const navigate = useNavigate();
 
   const handleSendNewPassword = async () => {
     try {
@@ -24,6 +27,7 @@ export default function ChangePasswordScreen() {
       );
 
       console.log(response.data);
+      navigate("/auth/login");
     } catch (error) {
       console.error("Erro ao mudar sua senha:", error);
     }
