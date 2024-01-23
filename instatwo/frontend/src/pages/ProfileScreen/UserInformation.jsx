@@ -4,6 +4,7 @@ import ProfileImage from "../../components/ProfileImage";
 import ButtonComponent from "../../components/ButtonComponent";
 import axios from "axios";
 import AlertNoLogin from "../../AlertNoLogin";
+import profileIcon from "../../images/profile-icon-design-free-vector.jpg";
 
 const LimitedText = ({ text, limit }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -85,7 +86,7 @@ function UserInformation() {
       <Row className="d-flex ">
         <Col xs="auto" style={{ marginRight: "40px" }}>
           <ProfileImage
-            imageURL="https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
+            imageURL={!isLoggedIn ? profileIcon : userData.profileImageURL}
             altText="Profile Image"
             size="150px"
           />

@@ -7,6 +7,7 @@ import ProfileImage from "./ProfileImage";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
+import profileIcon from "../images/profile-icon-design-free-vector.jpg";
 
 function NavBarComponent() {
   const [userData, setUserData] = useState({});
@@ -111,7 +112,7 @@ function NavBarComponent() {
                     <Col xs="auto" className="p-0 m-0">
                       <Navbar.Brand>
                         <ProfileImage
-                          imageURL="https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
+                          imageURL={!isLoggedIn ? profileIcon : userData.profileImageURL}
                           altText="Profile Image"
                           size="45px" // Tamanho menor
                         />
