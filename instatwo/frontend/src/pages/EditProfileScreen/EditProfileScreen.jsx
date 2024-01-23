@@ -75,6 +75,8 @@ export default function EditProfileScreen() {
       setNewEmail('');
       setNewPassword('');
 
+      alert("Perfil editado com sucesso!");
+
       // Redirecione para a página de perfil após a edição
       navigate('/profile');
     } catch (error) {
@@ -130,7 +132,7 @@ export default function EditProfileScreen() {
                   onChange={(e) => setNewEmail(e.target.value)}
                 ></InputFormComponent>
                 <InputFormComponent
-                  type="text"
+                  type="password"
                   label="Nova Senha"
                   value={newPassword}
                   placeholder="Digite a nova senha..."
