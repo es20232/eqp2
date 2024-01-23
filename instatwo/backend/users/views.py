@@ -117,19 +117,6 @@ class RequestResetPassword(APIView):
             return response
 
 class ChangePassword(APIView):
-    
-    def get(self, request):
-        sent_token = request.data["token"]
-
-        token = Token.objects.filter(token=sent_token).first()
-        
-        response = Response()
-        if token is None:
-            response.data = {"message" : "Token inválido", "reset_token" : token.token}
-        else:
-            response.data = {"message" : "Token válido", "reset_token" : token.token}
-        
-        return response
 
     def post(self, request):
         sent_token = request.data["token"]

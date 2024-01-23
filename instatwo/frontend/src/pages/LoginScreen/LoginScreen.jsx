@@ -8,7 +8,6 @@ import img02 from "../../images/img02.png";
 import NavBarComponent from "../../components/NavBarComponent";
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 
 axios.defaults.xsrfCookieName = "csrftoken";
@@ -27,25 +26,27 @@ function LoginScreen() {
         email: email,
         password: password,
       });
-  
+
       // Verifica se 'response.data' está definido antes de acessá-lo.
       const jwtToken = response && response.data ? response.data.jwt : null;
-  
+
       // Armazena o token JWT no estado ou no armazenamento local (localStorage ou sessionStorage).
       setLoginError(null);
-  
+
       // Configura o estado para redirecionar.
       setRedirect(true);
-  
     } catch (error) {
       // Verifica se 'error.response' e 'error.response.data' estão definidos antes de acessá-los.
-      const errorMessage = error.response && error.response.data ? error.response.data.message : "Erro desconhecido";
-  
+      const errorMessage =
+        error.response && error.response.data
+          ? error.response.data.message
+          : "Erro desconhecido";
+
       // Exibe mensagem de erro usando 'setLoginError'.
       setLoginError(errorMessage);
     }
   };
-  
+
   if (redirect) {
     return <Navigate to="/profile" />;
   }
@@ -77,7 +78,10 @@ function LoginScreen() {
         <div style={center_container}>
           <div style={content}>
             <h1 style={{ color: props.colorLogoTitle, fontSize: "45px" }}>
-              <img src={props.img02} style={{ width: "180px", height: "40px" }} />
+              <img
+                src={props.img02}
+                style={{ width: "180px", height: "40px" }}
+              />
             </h1>
             <p style={{ color: props.colorTextBelowTitle, fontWeight: "bold" }}>
               Uma rede social para <br /> você e seus amigos.
@@ -92,14 +96,21 @@ function LoginScreen() {
     <>
       <NavBarComponent></NavBarComponent>
       <Container fluid>
-        <Row className="justify-content-center align-items-center" style={{ marginTop: "12%" }}>
+        <Row
+          className="justify-content-center align-items-center"
+          style={{ marginTop: "12%" }}
+        >
           <Col xs="auto">
             <ContainerComponent
               colorBackground="#13293d"
               content={
                 <Col className="justify-content-center align-items-center">
                   <LogoLoginScreen img01={img01}></LogoLoginScreen>
-                  <TextAppLogin img02={img02} colorLogoTitle="white" colorTextBelowTitle="#6495b0"></TextAppLogin>
+                  <TextAppLogin
+                    img02={img02}
+                    colorLogoTitle="white"
+                    colorTextBelowTitle="#6495b0"
+                  ></TextAppLogin>
                 </Col>
               }
             ></ContainerComponent>
@@ -109,7 +120,9 @@ function LoginScreen() {
               colorBackground="#e6e6e6"
               content={
                 <Col className="justify-content-center align-items-center">
-                  <h1 style={{ color: "#0d263d", fontWeight: "Bold" }}>Entrar</h1>
+                  <h1 style={{ color: "#0d263d", fontWeight: "Bold" }}>
+                    Entrar
+                  </h1>
                   <InputFormComponent
                     type="text"
                     label="E-mail"
@@ -126,22 +139,25 @@ function LoginScreen() {
                   ></InputFormComponent>
                   <div className="mt-4" style={center_container}>
                     <div style={content}>
-                      <Button href="/refresh" variant="link" style={{ color: "#267094" }}>
+                      <Button
+                        href="/refresh"
+                        variant="link"
+                        style={{ color: "#267094" }}
+                      >
                         Esqueci a senha
                       </Button>
                     </div>
                   </div>
                   <Row className="d-flex justify-content-center align-items-center mt-3">
                     <Col xs="auto">
-                      <Link to="/auth/register">
-                        <ButtonComponent
-                          buttonColor="#4d4d4d"
-                          textColor="white"
-                          text="Cadastre-se"
-                          sizeRound="8px"
-                          isRound={true}
-                        ></ButtonComponent>
-                      </Link>
+                      <ButtonComponent
+                        to="/auth/register"
+                        buttonColor="#4d4d4d"
+                        textColor="white"
+                        text="Cadastre-se"
+                        sizeRound="8px"
+                        isRound={true}
+                      ></ButtonComponent>
                     </Col>
                     <Col xs="auto">
                       <ButtonComponent

@@ -5,9 +5,11 @@ import InputFormComponent from "../../components/InputFormComponent";
 import ButtonComponent from "../../components/ButtonComponent";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function RefreshScreen() {
   const [username, setUsername] = useState("");
+  const navigate = useNavigate();
 
   const handleSendUsername = async () => {
     try {
@@ -18,7 +20,10 @@ export default function RefreshScreen() {
         }
       );
 
+      alert("Seu token de recuperação de senha foi enviado para o seu e-mail.");
       console.log(response.data);
+      // Realiza a navegação para "/change_password" após o sucesso
+      navigate("/change_password");
     } catch (error) {
       console.error("Erro ao enviar e-mail:", error);
     }

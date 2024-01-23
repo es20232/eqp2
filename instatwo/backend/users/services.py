@@ -1,7 +1,7 @@
 from django.core.mail import send_mail as django_send_email
 
 def send_reset_password_email(token):
-    domain = "localhost:8000"
+    domain = "localhost:3000"
     url = f"https://{domain}/change_password/?token={token.token}"
     message = f"Acesse este link para mudar sua senha: {url}"
     

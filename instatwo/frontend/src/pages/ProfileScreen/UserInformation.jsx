@@ -4,7 +4,6 @@ import ProfileImage from "../../components/ProfileImage";
 import ButtonComponent from "../../components/ButtonComponent";
 import axios from "axios";
 import AlertNoLogin from "../../AlertNoLogin";
-import { Navigate } from "react-router-dom";
 
 const LimitedText = ({ text, limit }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -57,6 +56,7 @@ function UserInformation() {
   }, []);
 
   const handleLogout = async () => {
+
     try {
       await axios.post("http://localhost:8080/api/logout");
       window.location.reload();
@@ -92,7 +92,7 @@ function UserInformation() {
         </Col>
         <Col xs="auto" style={{ maxWidth: "400px", maxHeight: "100px" }}>
           <h1 style={{ color: "#0d263d", fontWeight: "bold " }}>
-            {userData.name}
+            {userData.username}
           </h1>
           <p style={{ color: "#999999", fontWeight: "normal" }}>
             @{userData.username}
