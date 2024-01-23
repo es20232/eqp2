@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
+from django.contrib.auth.tokens import default_token_generator
 from .managers import UserManager
 
 class User(AbstractUser):
@@ -7,9 +9,6 @@ class User(AbstractUser):
     password = models.CharField(max_length=255)
     email = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
-    birth_date = models.DateField(null=True, blank=True)
-    bio = models.CharField(max_length=256, null=True, blank=True)
-    profile_img = models.CharField(max_length=256)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

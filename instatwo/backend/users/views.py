@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from .serializers import UserSerializer
 from .models import User, Token
+from .services import send_reset_password_email
 import jwt, datetime
 
 
@@ -110,7 +111,7 @@ class ResetPassword(APIView):
             token = Token(user=user)
             token.initialize()
             Token.objects.update_or_create(user=user, defaults={"token": token.token, "expire_at": token.expire_at})
-            send_email.reset_password(token)
+            send_reset_password_email(token)
             response = Response()
             response.data = {'message' : "Token enviado para seu email"}
             return response
@@ -130,6 +131,7 @@ class ChangePassword(APIView):
         else:
             user = token.user
             user.set_password(new_password)
+            user.save()
             response = Response()
             response.data = {"message" : "Senha alterada!"}
             return response

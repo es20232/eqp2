@@ -137,3 +137,11 @@ AUTH_USER_MODEL = 'users.User'
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'your-smtp-server.com'
+EMAIL_PORT = 587  # Use the appropriate port for your email provider
+EMAIL_USE_TLS = True  # Or use EMAIL_USE_SSL if your provider requires SSL
+EMAIL_HOST_USER = 'user@instatwo.com'
+EMAIL_HOST_PASSWORD = 'password'
