@@ -74,7 +74,7 @@ function UserInformation() {
     // Faça o upload da imagem para o backend
     try {
       const formData = new FormData();
-      formData.append("user_image", file);
+      formData.append("user_images", file);
       await axios.post("http://localhost:8080/api/edit-profile", formData);
       // Atualize a imagem exibida após o upload
       const response = await axios.get("http://localhost:8080/api/user");
