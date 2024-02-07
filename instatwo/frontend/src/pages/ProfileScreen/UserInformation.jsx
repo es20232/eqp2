@@ -39,6 +39,8 @@ function UserInformation() {
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const [profileImage, setProfileImage] = useState(null);
+
   useEffect(() => {
     const checkAuthentication = async () => {
       try {
@@ -68,6 +70,20 @@ function UserInformation() {
     }
   };
 
+  const handleImageChange = async (file) => {
+    // Faça o upload da imagem para o backend
+    try {
+      const formData = new FormData();
+      formData.append("user_image", file);
+      await axios.post("http://localhost:8080/api/edit-profile", formData);
+      // Atualize a imagem exibida após o upload
+      const response = await axios.get("http://localhost:8080/api/user");
+      setUserData(response.data);
+    } catch (error) {
+      console.error("Erro ao fazer upload da imagem:", error);
+    }
+  };
+
   if (loading) {
     return <p>Carregando...</p>;
   }
@@ -89,6 +105,7 @@ function UserInformation() {
             imageURL={userData.img ? userData.img : profileIcon}
             altText="Profile Image"
             size="150px"
+            onImageChange={handleImageChange} // Passa a função de manipulação de imagem
           />
         </Col>
         <Col xs="auto" style={{ maxWidth: "400px", maxHeight: "100px" }}>

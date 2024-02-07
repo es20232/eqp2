@@ -16,3 +16,9 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+    
+class FileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User  # Associar o serializer ao modelo User
+        fields = ['img']
+        

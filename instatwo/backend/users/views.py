@@ -84,7 +84,13 @@ class EditProfileView(APIView):
         user.set_password(request.data.get('newPassword', user.password))
         user.name = request.data.get('newName', user.name)
         user.bio = request.data.get('newBio', user.bio)
-        user.img = request.data.get('newImg', user.img)
+        if 'user_images' in request.FILES:
+            user = request.user
+            user.profile_image = request.FILES['user_images']
+            user.save()
+            Response({'message': 'Imagem de perfil atualizada com sucesso!'})
+        else:
+            Response({'error': 'Nenhuma imagem de perfil enviada!'})
         user.username = request.data.get('newUsername', user.username)
         user.save()
 
