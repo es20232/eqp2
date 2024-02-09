@@ -66,6 +66,7 @@ export default function EditProfileScreen() {
     const checkAuthentication = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/user");
+        response.data.img = "http://localhost:8080/" + response.data.img;
         setUserData(response.data);
         setLoading(false);
         setIsLoggedIn(true);
