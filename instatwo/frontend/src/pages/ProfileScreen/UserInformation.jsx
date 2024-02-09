@@ -45,6 +45,7 @@ function UserInformation() {
     const checkAuthentication = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/user");
+        console.log(response.data);
         setUserData(response.data);
         setLoading(false);
         setIsLoggedIn(true);
