@@ -48,7 +48,7 @@ function LoginScreen() {
   };
 
   if (redirect) {
-    return <Navigate to="/profile" />;
+    return <Navigate to="/dashboard" />;
   }
 
   const center_container = {

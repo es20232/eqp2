@@ -22,6 +22,7 @@ function App() {
           <Route path="/auth/register" element={<RegisterScreen/>} />
           <Route path="/profile" element={<ProfileScreen/>} />
           <Route path="/profile/edit" element={<EditProfileScreen/>} />
+          <Route path="/dashboard" element={<DashBoardScreen/>} />
           <Route path="/refresh" element={<RefreshScreen/>} />
           <Route path="/change_password" element={<ChangePasswordScreen/>} />
         </Routes>

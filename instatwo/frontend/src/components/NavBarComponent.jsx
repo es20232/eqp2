@@ -67,7 +67,7 @@ function NavBarComponent() {
     <div>
       <Navbar className="justify-content-between fixed-top" style={navbarStyle}>
         <Container>
-          <Navbar.Brand href="/" style={logoStyle}>
+          <Navbar.Brand href={isLoggedIn ? "/dashboard" : "/"} style={logoStyle}>
             InstaTwo
           </Navbar.Brand>
 
