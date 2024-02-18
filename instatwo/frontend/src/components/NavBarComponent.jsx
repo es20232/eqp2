@@ -91,6 +91,8 @@ function NavBarComponent() {
                   border: "none", // Remover borda
                   outline: "none", // Remover contorno ao focar
                 }}
+                onFocus={(e) => (e.target.style.backgroundColor = "#ffffff")} // Alterar cor de fundo ao focar
+                onBlur={(e) => (e.target.style.backgroundColor = "#446889")} // Restaurar cor de fundo ao perder foco
               />
             </Form>
           </Col>
