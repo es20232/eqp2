@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 import profileIcon from "../images/profile-icon-design-free-vector.jpg";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 function NavBarComponent() {
   const [userData, setUserData] = useState({});
@@ -67,60 +69,73 @@ function NavBarComponent() {
     <div>
       <Navbar className="justify-content-between fixed-top" style={navbarStyle}>
         <Container>
-          <Navbar.Brand href={isLoggedIn ? "/dashboard" : "/"} style={logoStyle}>
+          <Navbar.Brand
+            href={isLoggedIn ? "/dashboard" : "/"}
+            style={logoStyle}
+          >
             InstaTwo
           </Navbar.Brand>
 
-          <Row>
-            {/* <Col xs="auto" className="d-flex align-items-center">
-              <ButtonComponent
-                textColor="white"
-                text={<FaPlus />}
-                size="48px"
-                isRound={"true"}
-                sizeRound="50%"
-                buttonColor="#267094"
+          <Col style={{ marginLeft: "150px", marginRight: "150px" }}>
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Pesquisar usuários..."
+                className="me-2"
+                aria-label="Search"
+                style={{
+                  backgroundColor: "#446889",
+                  color: "#13293d",
+                  fontStyle: "bold",
+                  height: "45px",
+                  border: "none", // Remover borda
+                  outline: "none", // Remover contorno ao focar
+                }}
               />
-            </Col> */}
+            </Form>
+          </Col>
 
+          <Row>
             <Col xs="auto">
               {!isLoggedIn && (
                 <Nav className="me-auto">
-                <Nav.Link href="/auth/login" style={{ color: "white" }}>
-                  Entrar
-                </Nav.Link>
-                <Nav.Link href="/auth/register" style={{ color: "white" }}>
-                  Cadastre-se
-                </Nav.Link>
-              </Nav>
+                  <Nav.Link href="/auth/login" style={{ color: "white" }}>
+                    Entrar
+                  </Nav.Link>
+                  <Nav.Link href="/auth/register" style={{ color: "white" }}>
+                    Cadastre-se
+                  </Nav.Link>
+                </Nav>
               )}
               {isLoggedIn && (
-                <Link to="/profile" style={{ textDecoration: "none" }}>
-                  <Row
-                    className="align-items-center no-gutters p-0 m-0"
-                    style={rowStyle}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    <Col xs="auto" className="p-0 m-0">
-                      <Navbar.Brand
-                        href="/profile"
-                        style={{ color: "white", fontSize: "18px" }}
-                      >
-                        {userData.username}
-                      </Navbar.Brand>
-                    </Col>
-                    <Col xs="auto" className="p-0 m-0">
-                      <Navbar.Brand>
-                        <ProfileImage
-                          imageURL={userData.img ? userData.img : profileIcon}
-                          altText="Profile Image"
-                          size="45px" // Tamanho menor
-                        />
-                      </Navbar.Brand>
-                    </Col>
-                  </Row>
-                </Link>
+                <Container>
+                  <Link to="/profile" style={{ textDecoration: "none" }}>
+                    <Row
+                      className="align-items-center no-gutters p-0 m-0"
+                      style={rowStyle}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    >
+                      <Col xs="auto" className="p-0 m-0">
+                        <Navbar.Brand
+                          href="/profile"
+                          style={{ color: "white", fontSize: "18px" }}
+                        >
+                          {userData.username}
+                        </Navbar.Brand>
+                      </Col>
+                      <Col xs="auto" className="p-0 m-0">
+                        <Navbar.Brand>
+                          <ProfileImage
+                            imageURL={userData.img ? userData.img : profileIcon}
+                            altText="Profile Image"
+                            size="45px" // Tamanho menor
+                          />
+                        </Navbar.Brand>
+                      </Col>
+                    </Row>
+                  </Link>
+                </Container>
               )}
             </Col>
           </Row>
