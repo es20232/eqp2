@@ -16,6 +16,7 @@ const CardFeedImage = (props) => {
             imageURL={"https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"}
             altText="Profile Image"
             size="45px" // Tamanho menor
+            allowChange={false}
           />
           <span
             className="ms-2"
