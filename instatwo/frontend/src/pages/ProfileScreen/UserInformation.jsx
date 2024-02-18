@@ -107,7 +107,7 @@ function UserInformation() {
             imageURL={userData.img ? userData.img : profileIcon}
             altText="Profile Image"
             size="150px"
-            onImageChange={handleImageChange} // Passa a função de manipulação de imagem
+            allowChange={false}
           />
         </Col>
         <Col xs="auto" style={{ maxWidth: "400px", maxHeight: "100px" }}>
