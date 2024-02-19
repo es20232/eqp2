@@ -7,6 +7,8 @@ import ButtonComponent from "../../components/ButtonComponent";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import axios from "axios";
 import { useState } from "react";
+import { Image } from "react-bootstrap";
+import InputFormComponent from "../../components/InputFormComponent";
 
 const CardFeedImage = (props) => {
   return (
@@ -59,6 +61,7 @@ const CardFeedImage = (props) => {
               text={<FaThumbsUp />}
               size="48px"
               buttonColor="#267094"
+              sizeRound="8px"
             />
             {"  "}
             <ButtonComponent
@@ -66,12 +69,14 @@ const CardFeedImage = (props) => {
               text={<FaThumbsDown />}
               size="48px"
               buttonColor="#ff0000"
+              sizeRound="8px"
             />
           </Col>
           <Col xs="auto">
             <ButtonComponent
-              buttonColor="#999999"
-              textColor="#4d4d4d"
+            to="/comments"
+              buttonColor="#4d4d4d"
+              textColor="white"
               text="Comentários"
               size="118px"
             />
@@ -84,67 +89,138 @@ const CardFeedImage = (props) => {
 
 export default function DashBoardScreen() {
   const [posts, setPosts] = useState([]);
+  const [postImage, setPostImage] = useState(null);
+  const [publish, setPublish] = useState(false);
+  const [caption, setCaption] = useState("");
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-          const response = await axios.get("http://localhost:8080/api/posts");
-          console.log(response.data);
-          const postsWithFullMediaUrl = response.data.map(post => ({
-              ...post,
-              media: `http://localhost:8080${post.media}`
-          }));
+        const response = await axios.get("http://localhost:8080/api/posts");
+        console.log(response.data);
+        const postsWithFullMediaUrl = response.data.map((post) => ({
+          ...post,
+          media: `http://localhost:8080${post.media}`,
+        }));
 
-          setPosts(postsWithFullMediaUrl);
+        setPosts(postsWithFullMediaUrl);
       } catch (error) {
-          console.error('Error fetching posts:', error);
+        console.error("Error fetching posts:", error);
       }
-  };
+    };
 
-  fetchPosts();
+    fetchPosts();
   }, []);
+
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setPostImage(file);
+  // };
+
+  // const handleUploadImage = () => {
+  //   const formData = new FormData();
+  //   formData.append("image", postImage);
+
+  //   axios
+  //     .post("http://sua-api.com/upload", formData)
+  //     .then((response) => {
+  //       console.log("Imagem enviada com sucesso:", response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Erro ao enviar imagem:", error);
+  //     });
+  // };
 
   return (
     <>
       <NavBarComponent />
       <Container className="d-flex flex-column align-items-center">
         <div style={{ marginTop: "5rem" }}></div>
-        <ContainerComponent
-          colorBackground="#e6e6e6"
-          width="32rem"
-          content={
-            <Row className="d-flex justify-content-between align-items-center">
-              <Col xs="auto">
-                <p className="mt-3">Crie uma nova publicação!</p>
-              </Col>
-              <Col xs="auto">
-                <ButtonComponent
-                  buttonColor="#4b89be"
-                  textColor="white"
-                  text="Escolher"
-                  size="130px"
-                  sizeRound="8px"
-                />
-              </Col>
-            </Row>
-          }
-          padding="p-3"
-        />
 
-        {posts.map((post) => {return (
+        {publish ? (
           <ContainerComponent
             colorBackground="#e6e6e6"
             width="32rem"
-            padding="p-0"
             content={
-              <CardFeedImage
-                altText={post.id}
-                srcImage={post.media}
-                caption={post.caption}
-              />
+              <div>
+                <Row>
+                  <Col xs={3}>
+                    <Image
+                      height={100}
+                      width={100}
+                      src="https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
+                    ></Image>
+                  </Col>
+                  <Col xs={9}>
+                    <InputFormComponent
+                      as="textarea"
+                      label="Insira uma legenda:"
+                      value={caption}
+                      placeholder="Digite uma legenda..."
+                      onChange={(e) => setCaption(e.target.value)}
+                    ></InputFormComponent>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className="d-flex justify-content-center mt-2">
+                    <ButtonComponent
+                      buttonColor="#4b89be"
+                      textColor="white"
+                      text="Publicar"
+                      size="130px"
+                      sizeRound="8px"
+                      onClick={() => setPublish(!publish)}
+                    />
+                  </Col>
+                </Row>
+              </div>
             }
+            padding="p-3"
           />
-        );})}
+        ) : (
+          <ContainerComponent
+            colorBackground="#e6e6e6"
+            width="32rem"
+            content={
+              <Row className="d-flex justify-content-between align-items-center">
+                <Col xs="auto">
+                  <p className="mt-3">Crie uma nova publicação!</p>
+                </Col>
+                <Col xs="auto">
+                  {/* <input type="file" onChange={handleImageChange} /> */}
+                  <ButtonComponent
+                    buttonColor="#4b89be"
+                    textColor="white"
+                    text="Publicar"
+                    size="130px"
+                    sizeRound="8px"
+                    onClick={() => {
+                      setPublish(true);
+                    }}
+                  />
+                </Col>
+              </Row>
+            }
+            padding="p-3"
+          />
+        )}
+
+        {posts.map((post) => {
+          return (
+            <ContainerComponent
+              colorBackground="#e6e6e6"
+              width="32rem"
+              padding="p-0"
+              content={
+                <CardFeedImage
+                  altText={post.id}
+                  srcImage={post.media}
+                  caption={post.caption}
+                />
+              }
+            />
+          );
+        })}
       </Container>
     </>
   );

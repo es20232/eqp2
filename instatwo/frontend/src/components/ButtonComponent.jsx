@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function ButtonComponent(props) {
-  const { size, textColor, buttonColor, variant, text, onClick, isRound, sizeRound, to } = props;
+  const { size, textColor, buttonColor, variant, text, onClick, onChange, isRound, sizeRound, to } = props;
 
   const buttonStyle = {
     color: textColor || "white",
@@ -25,6 +25,7 @@ export default function ButtonComponent(props) {
         onClick={onClick || (() => {})}
         onMouseOver={(e) => (e.target.style.opacity = 0.8)} 
         onMouseOut={(e) => (e.target.style.opacity = 1)} 
+        onChange={onChange || (() => {})}
       >
         {text}
       </Button>

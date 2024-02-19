@@ -122,19 +122,19 @@ export default function EditProfileScreen() {
     }
   };
 
-  const handleImageChange = async (file) => {
-    // Faça o upload da imagem para o backend
-    try {
-      const formData = new FormData();
-      formData.append("user_images", file);
-      await axios.post("http://localhost:8080/api/edit-profile", formData);
-      // Atualize a imagem exibida após o upload
-      const response = await axios.get("http://localhost:8080/api/user");
-      setUserData(response.data);
-    } catch (error) {
-      console.error("Erro ao fazer upload da imagem:", error);
-    }
-  };
+  // const handleImageChange = async (file) => {
+  //   // Faça o upload da imagem para o backend
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("user_images", file);
+  //     await axios.post("http://localhost:8080/api/edit-profile", formData);
+  //     // Atualize a imagem exibida após o upload
+  //     const response = await axios.get("http://localhost:8080/api/user");
+  //     setUserData(response.data);
+  //   } catch (error) {
+  //     console.error("Erro ao fazer upload da imagem:", error);
+  //   }
+  // };
 
   if (loading) {
     return <p>Carregando...</p>;
