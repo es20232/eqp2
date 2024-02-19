@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Container, Card, Row, Col } from "react-bootstrap";
 import NavBarComponent from "../../components/NavBarComponent";
 import ContainerComponent from "../../components/ContainerComponent";
@@ -39,37 +39,13 @@ export default function CommentsScreen() {
                   </span>
                 </div>
               </Card.Title>
+              <hr className="my-2" />
               <Card.Body>
-                <Card.Text>
-                  <p>
-                    <span style={{ color: "#4d4d4d", fontWeight: "bold" }}>
-                      Nome
-                    </span>{" "}
-                    Contrary to popular belief, Lorem Ipsum is not simply random
-                    text. It has roots in a piece of classical Latin literature
-                    from 45 BC, making it over 2000 years old.
-                  </p>
-                </Card.Text>
-                <Card.Text>
-                  <p>
-                    <span style={{ color: "#4d4d4d", fontWeight: "bold" }}>
-                      Nome
-                    </span>{" "}
-                    Contrary to popular belief, Lorem Ipsum is not simply random
-                    text. It has roots in a piece of classical Latin literature
-                    from 45 BC, making it over 2000 years old.
-                  </p>
-                </Card.Text>
-                <Card.Text>
-                  <p>
-                    <span style={{ color: "#4d4d4d", fontWeight: "bold" }}>
-                      Nome
-                    </span>{" "}
-                    Contrary to popular belief, Lorem Ipsum is not simply random
-                    text. It has roots in a piece of classical Latin literature
-                    from 45 BC, making it over 2000 years old.
-                  </p>
-                </Card.Text>
+                <Comment />
+                <Comment />
+                <CommentLike />
+                <Comment />
+                <CommentLike/>
 
                 <hr className="my-2" />
 
@@ -103,6 +79,47 @@ export default function CommentsScreen() {
           }
         />
       </Container>
+    </>
+  );
+}
+
+function Comment() {
+  return (
+    <>
+      <Card.Text>
+        <p>
+          <span style={{ color: "#4d4d4d", fontWeight: "bold" }}>Nome</span>{" "}
+          Contrary to popular belief, Lorem Ipsum is not simply random text. It
+          has roots in a piece of classical Latin literature from 45 BC, making
+          it over 2000 years old.
+        </p>
+      </Card.Text>
+    </>
+  );
+}
+
+function CommentLike() {
+  return (
+    <>
+      <Card.Text>
+          <div className="mb-2">
+            <ProfileImage
+              imageURL={
+                "https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
+              }
+              altText="Profile Image"
+              size="30px" // Tamanho menor
+              allowChange={false}
+            />
+            <span
+              className="ms-2"
+              style={{ color: "#4d4d4d", fontWeight: "bold" }}
+            >
+              Nome
+            </span>{" "}
+            Curtiu sua postagem - <span>(12:00 | 12/03/2024)</span>
+          </div>
+      </Card.Text>
     </>
   );
 }
