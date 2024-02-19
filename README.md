@@ -6,7 +6,8 @@ Projeto destinado a criação de um instagram simplificado, o mesmo possui algum
 
 ## Diagrama de Classes
 
-![Captura de tela 2024-01-22 214938](https://github.com/es20232/eqp2/assets/96149641/96fbb2ee-d188-4fea-920c-14dcefc917dd)
+![image](https://github.com/es20232/eqp2/assets/123307669/1b2fb15d-086f-4188-9fbb-61fc6012af3d)
+
 
 ## Diagrama Entidade Relacionamento
 
