@@ -35,6 +35,7 @@ const CircularIcon = (props) => {
 };
 
 const ImageProfileEdit = (props) => {
+
   return (
     <Row className="mb-4">
       <Col>
@@ -44,6 +45,7 @@ const ImageProfileEdit = (props) => {
               imageURL={props.img ? props.img : props.profileIcon}
               altText="Profile Image"
               size="200px"
+              onImageChange={props.handleImageChange}
             />
             <div className="d-flex justify-content-center">
               <CircularIcon></CircularIcon>
@@ -120,6 +122,20 @@ export default function EditProfileScreen() {
     }
   };
 
+  // const handleImageChange = async (file) => {
+  //   // Faça o upload da imagem para o backend
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("user_images", file);
+  //     await axios.post("http://localhost:8080/api/edit-profile", formData);
+  //     // Atualize a imagem exibida após o upload
+  //     const response = await axios.get("http://localhost:8080/api/user");
+  //     setUserData(response.data);
+  //   } catch (error) {
+  //     console.error("Erro ao fazer upload da imagem:", error);
+  //   }
+  // };
+
   if (loading) {
     return <p>Carregando...</p>;
   }
@@ -141,6 +157,7 @@ export default function EditProfileScreen() {
                 <ImageProfileEdit
                   img={userData.img}
                   profileIcon={profileIcon}
+                  // handleImageChange={handleImageChange}
                 />
                 <InputFormComponent
                   type="text"

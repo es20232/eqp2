@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterView, LoginView, UserView, LogoutView, EditProfileView, RequestResetPassword, ChangePassword
+from .views import RegisterView, LoginView, UserView, LogoutView, EditProfileView, RequestResetPassword, ChangePassword, ListarUsuariosView
 from .views import SendLike, PostComment, FeedPosts, SearchProfile, CreatePost, GetPostComments, GetPostLikes
 
 urlpatterns = [
@@ -17,4 +17,5 @@ urlpatterns = [
     path('create-post', CreatePost.as_view()),
     path('get-comments', GetPostComments.as_view()),
     path('get-likes', GetPostLikes.as_view())
+    path('users', ListarUsuariosView.as_view())
 ]

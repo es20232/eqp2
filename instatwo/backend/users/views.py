@@ -253,3 +253,9 @@ class GetPostLikes(APIView):
         
         likes = Like.objects.filter(on_post=post)[:20]
         return Response(LikeSerializer(likes, many=True).data)
+
+class ListarUsuariosView(APIView):
+    def get(self, request):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
