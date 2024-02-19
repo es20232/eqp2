@@ -5,10 +5,43 @@ import ContainerComponent from "../../components/ContainerComponent";
 import ProfileImage from "../../components/ProfileImage";
 import ButtonComponent from "../../components/ButtonComponent";
 import InputFormComponent from "../../components/InputFormComponent";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import AlertNoLogin from "../../AlertNoLogin";
 
 export default function CommentsScreen() {
   const [comments, setComments] = useState();
+  const [userData, setUserData] = useState({
+    img: null, // Foto do usuário
+  });
+  const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/user");
+        response.data.img = "http://localhost:8080/" + response.data.img;
+        setUserData(response.data);
+        setLoading(false);
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.error("Erro ao recuperar dados do usuário:", error);
+        setLoading(false);
+        setIsLoggedIn(false);
+      }
+    };
+
+    checkAuthentication();
+  }, []);
+
+  if (loading) {
+    return <p>Carregando...</p>;
+  }
+
+  if (!isLoggedIn) {
+    return <AlertNoLogin />;
+  }
 
   return (
     <>
@@ -25,7 +58,9 @@ export default function CommentsScreen() {
                 <div className="mb-2">
                   <ProfileImage
                     imageURL={
-                      "https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
+                      userData.img
+                        ? userData.img
+                        : "https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
                     }
                     altText="Profile Image"
                     size="45px" // Tamanho menor
@@ -35,7 +70,7 @@ export default function CommentsScreen() {
                     className="ms-2"
                     style={{ color: "#4d4d4d", fontWeight: "bold" }}
                   >
-                    Nome
+                    {userData.name}
                   </span>
                 </div>
               </Card.Title>
