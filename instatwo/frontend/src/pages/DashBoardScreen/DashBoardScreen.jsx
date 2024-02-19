@@ -9,6 +9,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Image } from "react-bootstrap";
 import InputFormComponent from "../../components/InputFormComponent";
+import AlertNoLogin from "../../AlertNoLogin";
 
 const CardFeedImage = (props) => {
   return (
@@ -16,9 +17,7 @@ const CardFeedImage = (props) => {
       <Card.Title className="text-start mt-2 mb-2">
         <div style={{ marginLeft: "1.1rem" }}>
           <ProfileImage
-            imageURL={
-              "https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
-            }
+            imageURL={props.imageURL}
             altText="Profile Image"
             size="45px" // Tamanho menor
             allowChange={false}
@@ -27,7 +26,7 @@ const CardFeedImage = (props) => {
             className="ms-2"
             style={{ color: "#4d4d4d", fontWeight: "bold" }}
           >
-            Nome
+            {props.name}
           </span>
         </div>
       </Card.Title>
@@ -74,7 +73,7 @@ const CardFeedImage = (props) => {
           </Col>
           <Col xs="auto">
             <ButtonComponent
-            to="/comments"
+              to="/comments"
               buttonColor="#4d4d4d"
               textColor="white"
               text="Comentários"
@@ -111,6 +110,38 @@ export default function DashBoardScreen() {
 
     fetchPosts();
   }, []);
+
+  const [userData, setUserData] = useState({
+    img: null, // Foto do usuário
+  });
+  const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/user");
+        response.data.img = "http://localhost:8080/" + response.data.img;
+        setUserData(response.data);
+        setLoading(false);
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.error("Erro ao recuperar dados do usuário:", error);
+        setLoading(false);
+        setIsLoggedIn(false);
+      }
+    };
+
+    checkAuthentication();
+  }, []);
+
+  if (loading) {
+    return <p>Carregando...</p>;
+  }
+
+  if (!isLoggedIn) {
+    return <AlertNoLogin />;
+  }
 
   // const handleImageChange = (e) => {
   //   const file = e.target.files[0];
@@ -213,6 +244,8 @@ export default function DashBoardScreen() {
               padding="p-0"
               content={
                 <CardFeedImage
+                  imageURL={userData.img}
+                  name={userData.name}
                   altText={post.id}
                   srcImage={post.media}
                   caption={post.caption}

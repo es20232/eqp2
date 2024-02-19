@@ -56,9 +56,7 @@ function ProfileScreen() {
   }
 
   if (!isLoggedIn) {
-    return (
-      <AlertNoLogin/>
-    );
+    return <AlertNoLogin />;
   }
 
   return (
@@ -87,6 +85,7 @@ function ProfileScreen() {
             }
           })}
         </Row>
+        <div style={{ marginBottom: "2.5rem" }}></div>
       </Container>
     </div>
   );
