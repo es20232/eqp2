@@ -10,4 +10,4 @@ urlpatterns = [
     path('api/posts', views.PostViewSet.as_view({'post': 'create'})),
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

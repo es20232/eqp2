@@ -31,6 +31,7 @@ const CardFeedImage = (props) => {
       </Card.Title>
       <Card.Img
         src={props.srcImage}
+        alt={props.altText}
         className="img-fluid"
         style={{ height: "500px" }}
       />
@@ -42,8 +43,7 @@ const CardFeedImage = (props) => {
             marginTop: "1.2rem",
           }}
         >
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          {props.caption}
         </Card.Text>
         <Row
           className="justify-content-between"
@@ -83,15 +83,26 @@ const CardFeedImage = (props) => {
 };
 
 export default function DashBoardScreen() {
-  const [image, setImage] = useState(null);
-  const dicionario = {};
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const response = axios.get("http://localhost:8080/api/posts");
-  }, []);
+    const fetchPosts = async () => {
+      try {
+          const response = await axios.get("http://localhost:8080/api/posts");
+          console.log(response.data);
+          const postsWithFullMediaUrl = response.data.map(post => ({
+              ...post,
+              media: `http://localhost:8080${post.media}`
+          }));
 
-  const srcImage =
-    "https://conteudo.imguol.com.br/c/tab/be/2020/01/17/foto-whatsapp-sumida-1579293251261_v2_4x3.jpg";
+          setPosts(postsWithFullMediaUrl);
+      } catch (error) {
+          console.error('Error fetching posts:', error);
+      }
+  };
+
+  fetchPosts();
+  }, []);
 
   return (
     <>
@@ -120,18 +131,20 @@ export default function DashBoardScreen() {
           padding="p-3"
         />
 
-        <ContainerComponent
-          colorBackground="#e6e6e6"
-          width="32rem"
-          padding="p-0"
-          content={<CardFeedImage srcImage={srcImage} />}
-        />
-        <ContainerComponent
-          colorBackground="#e6e6e6"
-          width="32rem"
-          padding="p-0"
-          content={<CardFeedImage srcImage={srcImage} />}
-        />
+        {posts.map((post) => {return (
+          <ContainerComponent
+            colorBackground="#e6e6e6"
+            width="32rem"
+            padding="p-0"
+            content={
+              <CardFeedImage
+                altText={post.id}
+                srcImage={post.media}
+                caption={post.caption}
+              />
+            }
+          />
+        );})}
       </Container>
     </>
   );
