@@ -9,7 +9,7 @@ class User(AbstractUser):
     password = models.CharField(max_length=255)
     email = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
-    img = models.ImageField(upload_to='user_images/', null=True, blank=True)
+    img = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
 
     USERNAME_FIELD = 'email'
@@ -32,3 +32,18 @@ class Token(models.Model):
     def is_expired(self) -> bool:
         return timezone.now() > self.expire_at
 
+class Post(models.Model):
+    image = models.ImageField(upload_to='posts/', blank=True, null=True)
+    caption = models.TextField(null=True)
+    posted_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Like(models.Model):
+    weight = models.BooleanField(null=False)
+    liked_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    on_post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+class Comment(models.Model):
+    text = models.TextField(null=False, blank=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
