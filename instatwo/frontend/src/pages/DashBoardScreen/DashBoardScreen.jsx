@@ -116,6 +116,7 @@ export default function DashBoardScreen() {
   });
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -125,6 +126,12 @@ export default function DashBoardScreen() {
         setUserData(response.data);
         setLoading(false);
         setIsLoggedIn(true);
+
+        const responseUsers = await axios.get(
+          "http://localhost:8080/api/users"
+        );
+        console.log(responseUsers.data);
+        setUsers(responseUsers.data);
       } catch (error) {
         console.error("Erro ao recuperar dados do usuário:", error);
         setLoading(false);
@@ -244,7 +251,12 @@ export default function DashBoardScreen() {
               padding="p-0"
               content={
                 <CardFeedImage
-                  imageURL={userData.img}
+                  imageURL={
+                    // users.id === posts.id_user
+                    //   ? users.img
+                    //   : "https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
+                    userData.img
+                  }
                   name={userData.name}
                   altText={post.id}
                   srcImage={post.media}

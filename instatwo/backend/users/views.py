@@ -145,3 +145,9 @@ class ChangePassword(APIView):
             response = Response()
             response.data = {"message" : "Senha alterada!"}
             return response
+
+class ListarUsuariosView(APIView):
+    def get(self, request):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
