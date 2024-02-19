@@ -18,7 +18,10 @@ class Comment(models.Model):
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
     id_post = models.ForeignKey(Post, on_delete=models.CASCADE)
     text = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
     
 class Like(models.Model):
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
     id_post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    weight = models.IntegerField()
+    date = models.DateField(auto_now_add=True)
