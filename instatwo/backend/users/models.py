@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from django.contrib.auth.tokens import default_token_generator
 from .managers import UserManager
+from datetime import datetime
 
 class User(AbstractUser):
     username = models.CharField(max_length=100, unique=True, null=True)
@@ -35,15 +36,17 @@ class Token(models.Model):
 class Post(models.Model):
     image = models.ImageField(upload_to='posts/', blank=True, null=True)
     caption = models.TextField(null=True)
-    posted_at = models.DateTimeField(auto_now_add=True)
+    posted_at = models.DateTimeField(default=datetime.now)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Like(models.Model):
     weight = models.BooleanField(null=False)
+    liked_at = models.DateTimeField(default=datetime.now)
     liked_by = models.ForeignKey(User, on_delete=models.CASCADE)
     on_post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
 class Comment(models.Model):
     text = models.TextField(null=False, blank=False)
+    posted_at = models.DateTimeField(default=datetime.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
