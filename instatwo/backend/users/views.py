@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
-from .serializers import UserSerializer
-from .models import User, Token
+from .serializers import UserSerializer, PostSerializer, CommentSerializer, LikeSerializer
+from .models import User, Token, Like, Post, Comment
 from .services import send_reset_password_email
 import jwt, datetime
 
@@ -145,6 +145,114 @@ class ChangePassword(APIView):
             response = Response()
             response.data = {"message" : "Senha alterada!"}
             return response
+
+class SendLike(APIView):
+
+    def post(self, request):
+        token = request.COOKIES.get('jwt')
+
+        if not token:
+            raise AuthenticationFailed('Não autorizado!')
+        
+        try:
+            payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('Não autorizado!')
+    
+        user = User.objects.filter(id=payload["id"]).first()
+        post = Post.objects.filter(id=request.data["post_id"]).first()
+
+        if user == None:
+            raise AuthenticationFailed("Session expired")
+        elif post == None:
+            raise AuthenticationFailed("Post not found")
+
+        Like.objects.update_or_create(liked_by=user, weight=request.data["weight"], on_post=post)
+        response = Response()
+        response.data = {"message" : "Like/Dislike enviado"}
+        return response
+
+class PostComment(APIView):
+
+    def post(self, request):
+        token = request.COOKIES.get('jwt')
+
+        if not token:
+            raise AuthenticationFailed('Não autorizado!')
+        
+        try:
+            payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('Não autorizado!')
+    
+        user = User.objects.filter(id=payload["id"]).first()
+        post = Post.objects.filter(id=request.data["post_id"]).first()
+
+        if user == None:
+            raise AuthenticationFailed("Session expired")
+        elif post == None:
+            raise AuthenticationFailed("Post not found")
+        
+        comment = Comment(author=user, text=request.data["text"], post=post)
+        comment.save()
+
+        response = Response()
+        response.data = {
+            "message" : "Comment posted"
+        }
+
+        return response
+    
+class SearchProfile(APIView):
+
+    def get(self, request):
+        users = User.objects.filter(username__icontains=request.data["username"])
+        return Response(UserSerializer(users, many=True).data)
+
+class FeedPosts(APIView):
+
+    def get(self, request):
+        return Response(PostSerializer(Post.objects.order_by("posted_at")[:15], many=True).data)
+    
+class CreatePost(APIView):
+
+    def post(self, request):
+        token = request.COOKIES.get('jwt')
+
+        if not token:
+            raise AuthenticationFailed('Não autorizado!')
+        
+        try:
+            payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+        except jwt.ExpiredSignatureError:
+            raise AuthenticationFailed('Não autorizado!')
+        
+        user = User.objects.filter(id=payload['id']).first()
+        post = Post(user=user, caption=request.data["caption"], image=request.FILES["POST_IMAGE"])
+        post.save()
+        return Response(PostSerializer(post).data)
+
+class GetPostComments(APIView):
+
+    def get(self, request):
+        post = Post.objects.filter(id=request.data["post_id"]).first()
+
+        if post is None:
+            raise AuthenticationFailed("Post not found")
+        
+        comments = Comment.objects.filter(post=post)[:20]
+        return Response(CommentSerializer(comments, many=True).data)
+    
+class GetPostLikes(APIView):
+
+    def get(self, request):
+        post = Post.objects.filter(id=request.data["post_id"]).first()
+
+        if post is None:
+            raise AuthenticationFailed("Post not found")
+        
+        likes = Like.objects.filter(on_post=post)[:20]
+        return Response(LikeSerializer(likes, many=True).data)
 
 class ListarUsuariosView(APIView):
     def get(self, request):

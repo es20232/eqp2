@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import PostSerializer
-from .models import Post
+from users.models import Post
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
