@@ -76,26 +76,28 @@ function NavBarComponent() {
             InstaTwo
           </Navbar.Brand>
 
-          <Col style={{ marginLeft: "150px", marginRight: "150px" }}>
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Pesquisar usuários..."
-                className="me-2"
-                aria-label="Search"
-                style={{
-                  backgroundColor: "#446889",
-                  color: "#13293d",
-                  fontStyle: "bold",
-                  height: "45px",
-                  border: "none", // Remover borda
-                  outline: "none", // Remover contorno ao focar
-                }}
-                onFocus={(e) => (e.target.style.backgroundColor = "#ffffff")} // Alterar cor de fundo ao focar
-                onBlur={(e) => (e.target.style.backgroundColor = "#446889")} // Restaurar cor de fundo ao perder foco
-              />
-            </Form>
-          </Col>
+          {isLoggedIn && (
+            <Col style={{ marginLeft: "150px", marginRight: "150px" }}>
+              <Form className="d-flex">
+                <Form.Control
+                  type="search"
+                  placeholder="Pesquisar usuários..."
+                  className="me-2"
+                  aria-label="Search"
+                  style={{
+                    backgroundColor: "#446889",
+                    color: "#13293d",
+                    fontStyle: "bold",
+                    height: "45px",
+                    border: "none", // Remover borda
+                    outline: "none", // Remover contorno ao focar
+                  }}
+                  onFocus={(e) => (e.target.style.backgroundColor = "#ffffff")} // Alterar cor de fundo ao focar
+                  onBlur={(e) => (e.target.style.backgroundColor = "#446889")} // Restaurar cor de fundo ao perder foco
+                />
+              </Form>
+            </Col>
+          )}
 
           <Row>
             <Col xs="auto">

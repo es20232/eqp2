@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Card, Row, Col } from "react-bootstrap";
 import NavBarComponent from "../../components/NavBarComponent";
 import ContainerComponent from "../../components/ContainerComponent";
 import ProfileImage from "../../components/ProfileImage";
 import ButtonComponent from "../../components/ButtonComponent";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
+import axios from "axios";
+import { useState } from "react";
 
 const CardFeedImage = (props) => {
   return (
@@ -81,6 +83,13 @@ const CardFeedImage = (props) => {
 };
 
 export default function DashBoardScreen() {
+  const [image, setImage] = useState(null);
+  const dicionario = {};
+
+  useEffect(() => {
+    const response = axios.get("http://localhost:8080/api/posts");
+  }, []);
+
   const srcImage =
     "https://conteudo.imguol.com.br/c/tab/be/2020/01/17/foto-whatsapp-sumida-1579293251261_v2_4x3.jpg";
 
@@ -110,6 +119,7 @@ export default function DashBoardScreen() {
           }
           padding="p-3"
         />
+
         <ContainerComponent
           colorBackground="#e6e6e6"
           width="32rem"
