@@ -11,4 +11,5 @@ Projeto destinado a criação de um instagram simplificado, o mesmo possui algum
 
 ## Diagrama Entidade Relacionamento
 
-![Diagrama em branco (1)](https://github.com/es20232/eqp2/assets/96149641/294e8913-c19d-42bd-b190-74ee987431f3)
+![image](https://github.com/es20232/eqp2/assets/123307669/285f5524-82c6-4e7d-8df7-d6cbf96cb9f1)
+
