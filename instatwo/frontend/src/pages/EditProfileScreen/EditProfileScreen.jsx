@@ -62,7 +62,7 @@ export default function EditProfileScreen() {
   const [newName, setNewName] = useState(userData.name);
   const [newUsername, setNewUsername] = useState(userData.username);
   const [newBio, setNewBio] = useState(userData.bio);
-  const [user_images, setUserImage] = useState(null);
+  const [user_images, setUserImage] = useState(userData.img);
 
   const navigate = useNavigate();
 
