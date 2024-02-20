@@ -205,14 +205,6 @@ function CommentLike({ userName, action, timestamp, profileImg }) {
     <>
       <Card.Text>
         <div className="mb-2">
-          <ProfileImage
-            imageURL={
-              profileImg === null ? profileIcon : profileImg
-            }
-            altText="Profile Image"
-            size="30px" // Tamanho menor
-            allowChange={false}
-          />
           <span
             className="ms-2"
             style={{ color: "#4d4d4d", fontWeight: "bold" }}
