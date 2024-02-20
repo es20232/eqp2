@@ -13,6 +13,9 @@ import AlertNoLogin from "../../AlertNoLogin";
 import profileIcon from "../../images/profile-icon-design-free-vector.jpg";
 
 const CardFeedImage = (props) => {
+  const [likeCount, setLikeCount] = useState(0);
+  const [dislikeCount, setDislikeCount] = useState(0);
+
   const handleLike = async () => {
     try {
       const response = await axios.post("http://localhost:8080/api/send-like", {
@@ -22,6 +25,7 @@ const CardFeedImage = (props) => {
       });
       console.log("Like enviado com sucesso:", response.data);
       alert("Like enviado com sucesso!");
+      window.location.reload();
     } catch (error) {
       console.error("Erro ao enviar like:", error);
       // Tratar o erro, se necessário
@@ -37,11 +41,35 @@ const CardFeedImage = (props) => {
       });
       console.log("Dislike enviado com sucesso:", response.data);
       alert("Dislike enviado com sucesso!");
+      window.location.reload();
     } catch (error) {
       console.error("Erro ao enviar dislike:", error);
       // Tratar o erro, se necessário
     }
   };
+
+  useEffect(() => {
+    // Buscar a contagem de likes e deslikes do backend
+    const fetchLikesAndDislikes = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/get-likes?post_id=${props.post_id}`
+        );
+        const likes = response.data.filter(
+          (like) => like.weight === true
+        ).length;
+        const dislikes = response.data.filter(
+          (like) => like.weight === false
+        ).length;
+        setLikeCount(likes);
+        setDislikeCount(dislikes);
+      } catch (error) {
+        console.error("Erro ao buscar likes e dislikes:", error);
+      }
+    };
+
+    fetchLikesAndDislikes();
+  }, []);
 
   return (
     <>
@@ -94,6 +122,7 @@ const CardFeedImage = (props) => {
               sizeRound="8px"
               onClick={handleLike}
             />
+            <span className="ms-2 ml-2 mr-3">{likeCount}</span>
             {"  "}
             <ButtonComponent
               textColor="white"
@@ -103,6 +132,7 @@ const CardFeedImage = (props) => {
               sizeRound="8px"
               onClick={handleDislike}
             />
+            <span className="ms-2 ml-2 mr-3">{dislikeCount}</span>
           </Col>
           <Col xs="auto">
             <ButtonComponent
