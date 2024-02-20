@@ -139,8 +139,10 @@ const CardFeedImage = (props) => {
               to={`/comments/${props.post_id}`}
               buttonColor="#4d4d4d"
               textColor="white"
+              sizeRound="8px"
               text="Comentários"
               size="118px"
+
             />
           </Col>
         </Row>
