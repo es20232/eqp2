@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export default function ButtonComponent(props) {
-  const { size, textColor, buttonColor, variant, text, onClick, onChange, isRound, sizeRound, to } = props;
+  const { size, textColor, buttonColor, variant, text, onClick, onChange, isRound, sizeRound, to, type } = props;
 
   const buttonStyle = {
     color: textColor || "white",
@@ -26,6 +26,7 @@ export default function ButtonComponent(props) {
         onMouseOver={(e) => (e.target.style.opacity = 0.8)} 
         onMouseOut={(e) => (e.target.style.opacity = 1)} 
         onChange={onChange || (() => {})}
+        type={type? type : "button"}
       >
         {text ? text : <input type="file" id="image" name="image"/>}
       </Button>

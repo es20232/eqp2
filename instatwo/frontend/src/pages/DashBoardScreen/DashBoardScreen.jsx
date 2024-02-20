@@ -301,13 +301,15 @@ export default function DashBoardScreen() {
             content={
               <Row className="d-flex justify-content-between align-items-center">
                 <Col xs="auto">
-                  <p className="mt-3">Crie uma nova publicação!</p>
+                <h1 style={{ color: "#0d263d", fontWeight: "Bold", fontSize: 18 }}>
+                    Crie uma nova publicação!
+                  </h1>
                 </Col>
                 <Col xs="auto">
                   {/* <input type="file" onChange={handleImageChange} /> */}
                   <form onSubmit={handleSubmit}>
-                    <div>
-                      <label htmlFor="caption">Legenda:</label>
+                    <div className="mb-3">
+                      <label htmlFor="caption" style={{ marginRight: '10px' }}>Legenda:</label>
                       <input
                         type="text"
                         id="caption"
@@ -316,8 +318,9 @@ export default function DashBoardScreen() {
                         onChange={handleInputChange}
                       />
                     </div>
-                    <div>
-                      <label htmlFor="image">Imagem:</label>
+                    
+                    <div className="mb-3">
+                      <label htmlFor="image" style={{ marginRight: '10px' }}>Imagem:</label>
                       <input
                         type="file"
                         id="image"
@@ -325,7 +328,14 @@ export default function DashBoardScreen() {
                         onChange={handleInputChange}
                       />
                     </div>
-                    <button type="submit">Enviar</button>
+                    <ButtonComponent
+                        text="Publicar"
+                        sizeRound="8px"
+                        isRound={true}
+                        onClick={handleSubmit}
+                        type = "submit"
+                      >
+                      </ButtonComponent>
                   </form>
                 </Col>
               </Row>
