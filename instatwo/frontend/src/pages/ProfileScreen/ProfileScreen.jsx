@@ -73,7 +73,7 @@ function ProfileScreen() {
           {posts.map((post) => {
             if (post.user === userData.id) {
               return (
-                <Col className={hovered ? "mt-4" : "mt-2"} xs={6} md={4}>
+                <Col className="mt-2" xs={6} md={4}>
                   <Image
                     alt={post.image}
                     src={post.image}

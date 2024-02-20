@@ -204,10 +204,20 @@ class PostComment(APIView):
         return response
     
 class SearchProfile(APIView):
-
     def get(self, request):
-        users = User.objects.filter(username__icontains=request.data["username"])
-        return Response(UserSerializer(users, many=True).data)
+        # Acesse o parâmetro 'username' da URL
+        username = request.query_params.get('username', '')
+
+        # Filtra os usuários com base no username
+        users = User.objects.filter(username__icontains=username)
+
+        # Se não houver usuários, retorne uma resposta 404
+        if not users.exists():
+            raise NotFound("Usuários não encontrados")
+
+        # Serializa os usuários e envia a resposta
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
 
 class FeedPosts(APIView):
 

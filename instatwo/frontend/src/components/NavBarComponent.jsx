@@ -1,15 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { Navbar, Container, Row, Col, Nav } from "react-bootstrap";
-// import { FaPlus } from "react-icons/fa";
 import ProfileImage from "./ProfileImage";
-// import ButtonComponent from "./ButtonComponent";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 import profileIcon from "../images/profile-icon-design-free-vector.jpg";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 
 function NavBarComponent() {
   const [userData, setUserData] = useState({});
@@ -65,6 +62,26 @@ function NavBarComponent() {
     cursor: "pointer", // Altera o cursor ao passar o mouse
   };
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/api/search-profiles`
+      );
+      setSearchResults(response.data);
+      console.log("Usuários encontrados:", searchResults);
+    } catch (error) {
+      console.error("Erro ao buscar usuários:", error);
+    }
+  };
+
+  // const handleChange = (event) => {
+  //   setSearchTerm(event.target.value);
+  //   handleSearch(); // Chama a função de busca sempre que o valor do campo de entrada muda
+  // };
+
   return (
     <div>
       <Navbar className="justify-content-between fixed-top" style={navbarStyle}>
@@ -77,8 +94,14 @@ function NavBarComponent() {
           </Navbar.Brand>
 
           {isLoggedIn && (
-            <Col style={{ marginLeft: "150px", marginRight: "150px" }}>
-              <Form className="d-flex">
+            <Col style={{ marginLeft: "50px", marginRight: "50px" }}>
+              <Form
+                className="d-flex"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSearch(e.target.value);
+                }}
+              >
                 <Form.Control
                   type="search"
                   placeholder="Pesquisar usuários..."
@@ -94,8 +117,16 @@ function NavBarComponent() {
                   }}
                   onFocus={(e) => (e.target.style.backgroundColor = "#ffffff")} // Alterar cor de fundo ao focar
                   onBlur={(e) => (e.target.style.backgroundColor = "#446889")} // Restaurar cor de fundo ao perder foco
+                  value={searchTerm}
+                  onChange={(e) => {}}
                 />
               </Form>
+              {/* Mostrar os resultados da pesquisa
+              {searchResults.map((user, index) => (
+                <div key={index}>
+                  <p>{user.username}</p>
+                </div>
+              ))} */}
             </Col>
           )}
 
@@ -131,7 +162,9 @@ function NavBarComponent() {
                       <Col xs="auto" className="p-0 m-0">
                         <Navbar.Brand>
                           <ProfileImage
-                            imageURL={userData.img === null ? userData.img : profileIcon}
+                            imageURL={
+                              userData.img === null ? userData.img : profileIcon
+                            }
                             altText="Profile Image"
                             size="45px" // Tamanho menor
                           />

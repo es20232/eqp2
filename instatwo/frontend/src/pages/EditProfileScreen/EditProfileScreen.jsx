@@ -11,31 +11,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AlertNoLogin from "../../AlertNoLogin";
 import profileIcon from "../../images/profile-icon-design-free-vector.jpg";
-
-const CircularIcon = (props) => {
-  return (
-    <div
-      style={{
-        fontSize: "3px",
-        marginTop: "-70px",
-        marginLeft: "110px",
-        height: "80px",
-        width: "80px",
-        borderRadius: "50%",
-        backgroundColor: "#999999",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        cursor: "pointer",
-      }}
-    >
-      <FaEdit size={26} color="#4d4d4d" />
-    </div>
-  );
-};
+import Form from "react-bootstrap/Form";
 
 const ImageProfileEdit = (props) => {
-
   return (
     <Row className="mb-4">
       <Col>
@@ -47,9 +25,6 @@ const ImageProfileEdit = (props) => {
               size="200px"
               onImageChange={props.handleImageChange}
             />
-            <div className="d-flex justify-content-center">
-              <CircularIcon></CircularIcon>
-            </div>
           </div>
         </div>
       </Col>
@@ -87,6 +62,7 @@ export default function EditProfileScreen() {
   const [newName, setNewName] = useState(userData.name);
   const [newUsername, setNewUsername] = useState(userData.username);
   const [newBio, setNewBio] = useState(userData.bio);
+  const [user_images, setUserImage] = useState(null);
 
   const navigate = useNavigate();
 
@@ -100,6 +76,7 @@ export default function EditProfileScreen() {
           newName,
           newBio,
           newUsername,
+          user_images: user_images,
         },
         {
           withCredentials: true, // Certifique-se de incluir cookies na solicitação
@@ -112,6 +89,7 @@ export default function EditProfileScreen() {
       setNewName("");
       setNewBio("");
       setNewUsername("");
+      setUserImage(null);
 
       alert("Perfil editado com sucesso!");
 
@@ -137,14 +115,21 @@ export default function EditProfileScreen() {
         <div style={{ marginTop: "8rem" }}>
           <ContainerComponent
             colorBackground="#e6e6e6"
-            height="49rem"
+            height="54rem"
             content={
               <Col className="align-items-center">
                 <ImageProfileEdit
                   img={userData.img}
                   profileIcon={profileIcon}
-                  // handleImageChange={handleImageChange}
                 />
+                <Form>
+                  <Form.Group controlId="formFile" className="mb-3">
+                    <Form.Control
+                      type="file"
+                      onChange={(e) => setUserImage(e.target.files[0])}
+                    />
+                  </Form.Group>
+                </Form>
                 <InputFormComponent
                   type="text"
                   label="Novo Email"
