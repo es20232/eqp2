@@ -128,7 +128,7 @@ const CardFeedImage = (props) => {
               textColor="white"
               text={<FaThumbsDown />}
               size="48px"
-              buttonColor="#ff0000"
+              buttonColor="#CE1010"
               sizeRound="8px"
               onClick={handleDislike}
             />
