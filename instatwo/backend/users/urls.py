@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import RegisterView, LoginView, UserView, LogoutView, EditProfileView, RequestResetPassword, ChangePassword, ListarUsuariosView
-from .views import SendLike, PostComment, FeedPosts, SearchProfile, CreatePost, GetPostComments, GetPostLikes
+from .views import SendLike, PostComment, FeedPosts, SearchProfile, CreatePost, GetPostComments, GetPostLikes, ViewProfileView, UserPostView
+
 
 urlpatterns = [
     path('register', RegisterView.as_view()),
@@ -17,5 +18,7 @@ urlpatterns = [
     path('create-post', CreatePost.as_view()),
     path('get-comments', GetPostComments.as_view()),
     path('get-likes', GetPostLikes.as_view()),
-    path('users', ListarUsuariosView.as_view())
+    path('users', ListarUsuariosView.as_view()),
+    path('profile', ViewProfileView.as_view()),
+    path('posts', UserPostView.as_view())
 ]

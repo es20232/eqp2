@@ -217,6 +217,21 @@ class SearchProfile(APIView):
         # Serializa os usuários e envia a resposta
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
+    
+class ViewProfileView(APIView):
+
+    def get(self, request):
+        user = User.objects.filter(username=request.query_params.get('username')).first()
+        if user == None:
+            return AuthenticationFailed('Usuario nao encontrado')
+        return Response(UserSerializer(user).data) 
+    
+class UserPostView(APIView):
+
+    def get(self, request):
+        user = User.objects.filter(username=request.query_params.get('username')).first()
+        posts = Post.objects.filter(user=user)
+        return Response(PostSerializer(posts, many=True).data)
 
 class FeedPosts(APIView):
 

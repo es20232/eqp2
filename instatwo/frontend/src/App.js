@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import RefreshScreen from "./pages/RefreshScreen/RefreshScreen";
 import ChangePasswordScreen from "./pages/ChangePasswordScreen/ChangePasswordScreen";
 import CommentsScreen from "./pages/CommentsScreen/CommentsScreen";
+import UsersProfiles from "./pages/UsersProfiles/UsersProfiles";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/refresh" element={<RefreshScreen/>} />
           <Route path="/change_password" element={<ChangePasswordScreen/>} />
           <Route path="/comments/:post_id" element={<CommentsScreen/>} />
+          <Route path="/usersprofiles/:username" element={<UsersProfiles/>} />
         </Routes>
       </Router>
     </>

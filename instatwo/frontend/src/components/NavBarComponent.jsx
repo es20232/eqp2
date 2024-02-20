@@ -67,9 +67,10 @@ function NavBarComponent() {
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = async () => {
+    console.log("Buscando usuários com o termo:", searchTerm);
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/search-profiles`
+        `http://localhost:8080/api/search-profiles?username=${searchTerm}`
       );
       setSearchResults(response.data);
       console.log("Usuários encontrados:", searchResults);
@@ -123,9 +124,9 @@ function NavBarComponent() {
                 />
               </Form>
               {searchResults.map((user, index) => (
-                <div key={index}>
+                <a href={"/usersprofiles/"+ user.username} key={index}>
                   <p>{user.username}</p>
-                </div>
+                </a>
               )) }
             </Col>
           )}
