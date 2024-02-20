@@ -35,14 +35,12 @@ const ProfileImage = ({
           height: size,
           cursor: isChangeAllowed ? "pointer" : "default",
         }}
-        onClick={handleClick}
       />
       <input
         type="file"
         accept="image/*"
         style={{ display: "none" }}
         ref={inputRef}
-        onChange={handleChange}
       />
     </>
   );
@@ -57,7 +55,7 @@ ProfileImage.propTypes = {
 };
 
 ProfileImage.defaultProps = {
-  allowChange: true // Por padrão, permitir a mudança
+  allowChange: true, // Por padrão, permitir a mudança
 };
 
 export default ProfileImage;
