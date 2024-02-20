@@ -78,10 +78,10 @@ function NavBarComponent() {
     }
   };
 
-  // const handleChange = (event) => {
-  //   setSearchTerm(event.target.value);
-  //   handleSearch(); // Chama a função de busca sempre que o valor do campo de entrada muda
-  // };
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+    handleSearch(); // Chama a função de busca sempre que o valor do campo de entrada muda
+  };
 
   return (
     <div>
@@ -119,15 +119,14 @@ function NavBarComponent() {
                   onFocus={(e) => (e.target.style.backgroundColor = "#ffffff")} // Alterar cor de fundo ao focar
                   onBlur={(e) => (e.target.style.backgroundColor = "#446889")} // Restaurar cor de fundo ao perder foco
                   value={searchTerm}
-                  onChange={(e) => {}}
+                  onChange={(e) => {handleChange(e)}}
                 />
               </Form>
-              {/* Mostrar os resultados da pesquisa
               {searchResults.map((user, index) => (
                 <div key={index}>
                   <p>{user.username}</p>
                 </div>
-              ))} */}
+              )) }
             </Col>
           )}
 
@@ -164,7 +163,7 @@ function NavBarComponent() {
                         <Navbar.Brand>
                           <ProfileImage
                             imageURL={
-                              userData.img === null ? userData.img : profileIcon
+                              userData.img ? userData.img : profileIcon
                             }
                             altText="Profile Image"
                             size="45px" // Tamanho menor

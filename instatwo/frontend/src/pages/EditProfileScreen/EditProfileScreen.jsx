@@ -23,7 +23,7 @@ const ImageProfileEdit = (props) => {
               imageURL={props.img ? props.img : props.profileIcon}
               altText="Profile Image"
               size="200px"
-              onImageChange={props.handleImageChange}
+              allowchange = {false}
             />
           </div>
         </div>
@@ -62,24 +62,29 @@ export default function EditProfileScreen() {
   const [newName, setNewName] = useState(userData.name);
   const [newUsername, setNewUsername] = useState(userData.username);
   const [newBio, setNewBio] = useState(userData.bio);
-  const [user_images, setUserImage] = useState(userData.img);
+  const [user_images, setUserImage] = useState(null);
 
   const navigate = useNavigate();
 
   const handleEditProfile = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/edit-profile",
-        {
-          newEmail,
-          newPassword,
-          newName,
-          newBio,
-          newUsername,
-          user_images: user_images,
-        },
+      const formData = new FormData();
+      formData.append("email", newEmail);
+      formData.append("password", newPassword);
+      formData.append("name", newName);
+      formData.append("bio", newBio);
+      formData.append("username", newUsername);
+      if (user_images) {
+        formData.append("user_images", user_images);
+      }
+        const response = await axios.post(
+          "http://localhost:8080/api/edit-profile",
+          formData,
         {
           withCredentials: true, // Certifique-se de incluir cookies na solicitação
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
 

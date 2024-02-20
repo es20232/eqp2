@@ -163,6 +163,7 @@ export default function DashBoardScreen() {
         console.log(response.data);
         const postsWithFullMediaUrl = response.data.map((post) => ({
           ...post,
+          user:{img: `http://localhost:8080${post.user.img}`, username: post.user.username},
           image: `http://localhost:8080${post.image}`,
         }));
 
@@ -358,9 +359,9 @@ export default function DashBoardScreen() {
                 content={
                   <CardFeedImage
                     imageURL={
-                      userData.img === null ? userData.img : profileIcon
+                      post.user.img ? post.user.img : profileIcon
                     }
-                    name={post.name}
+                    name={post.user.username}
                     altText={post.id}
                     srcImage={post.image}
                     caption={post.caption}

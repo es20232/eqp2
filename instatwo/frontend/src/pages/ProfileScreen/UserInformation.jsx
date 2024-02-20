@@ -98,7 +98,7 @@ function UserInformation() {
       <Row className="d-flex ">
         <Col xs="auto" style={{ marginRight: "40px" }}>
           <ProfileImage
-            imageURL={userData.img === null ? userData.img : profileIcon}
+            imageURL={userData.img ? userData.img : profileIcon}
             altText="Profile Image"
             size="150px"
             allowChange={false}

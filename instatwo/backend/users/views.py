@@ -85,8 +85,7 @@ class EditProfileView(APIView):
         user.name = request.data.get('newName', user.name)
         user.bio = request.data.get('newBio', user.bio)
         if 'user_images' in request.FILES:
-            user = request.user
-            user.profile_image = request.FILES['user_images']
+            user.img = request.FILES['user_images']
             user.save()
             Response({'message': 'Imagem de perfil atualizada com sucesso!'})
         else:

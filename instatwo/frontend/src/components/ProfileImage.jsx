@@ -14,14 +14,14 @@ const ProfileImage = ({
   const inputRef = useRef(null);
   const [isChangeAllowed, setIsChangeAllowed] = useState(allowChange);
 
-  const handleClick = () => {
-    inputRef.current.click();
-  };
+  // const handleClick = () => {
+  //   inputRef.current.click();
+  // };
 
-  const handleChange = (e) => {
-    const file = e.target.files[0];
-    onImageChange(file);
-  };
+  // const handleChange = (e) => {
+  //   const file = e.target.files[0];
+  //   onImageChange(file);
+  // };
 
   return (
     <>
@@ -55,7 +55,7 @@ ProfileImage.propTypes = {
 };
 
 ProfileImage.defaultProps = {
-  allowChange: true, // Por padrão, permitir a mudança
+  allowChange: true // Por padrão, permitir a mudança
 };
 
 export default ProfileImage;

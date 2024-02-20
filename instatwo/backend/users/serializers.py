@@ -21,18 +21,19 @@ class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User  # Associar o serializer ao modelo User
         fields = ['img']
-        
-class PostSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Post
-        fields = ['id', 'image', 'caption', 'posted_at', 'user']
 
 class AuthorSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username']
+        fields = ['id', 'username', 'img']
+        
+class PostSerializer(serializers.ModelSerializer):
+    user = AuthorSerializer()
+    
+    class Meta:
+        model = Post
+        fields = ['id', 'image', 'caption', 'posted_at', 'user']
 
 class CommentSerializer(serializers.ModelSerializer):
     author = AuthorSerializer()
