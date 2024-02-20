@@ -16,6 +16,6 @@ urlpatterns = [
     path('feed', FeedPosts.as_view()),
     path('create-post', CreatePost.as_view()),
     path('get-comments', GetPostComments.as_view()),
-    path('get-likes', GetPostLikes.as_view())
+    path('get-likes', GetPostLikes.as_view()),
     path('users', ListarUsuariosView.as_view())
 ]

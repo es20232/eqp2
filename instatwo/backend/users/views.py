@@ -233,22 +233,31 @@ class CreatePost(APIView):
         return Response(PostSerializer(post).data)
 
 class GetPostComments(APIView):
-
     def get(self, request):
-        post = Post.objects.filter(id=request.data["post_id"]).first()
+        post_id = request.query_params.get("post_id")
 
-        if post is None:
+        if not post_id:
+            raise AuthenticationFailed("Post ID not provided")
+
+        post = Post.objects.filter(id=post_id).first()
+
+        if not post:
             raise AuthenticationFailed("Post not found")
         
         comments = Comment.objects.filter(post=post)[:20]
-        return Response(CommentSerializer(comments, many=True).data)
+        serialized_comments = CommentSerializer(comments, many=True).data
+        return Response(serialized_comments)
     
 class GetPostLikes(APIView):
-
     def get(self, request):
-        post = Post.objects.filter(id=request.data["post_id"]).first()
+        post_id = request.query_params.get("post_id")
 
-        if post is None:
+        if not post_id:
+            raise AuthenticationFailed("post_id not provided")
+
+        post = Post.objects.filter(id=post_id).first()
+
+        if not post:
             raise AuthenticationFailed("Post not found")
         
         likes = Like.objects.filter(on_post=post)[:20]

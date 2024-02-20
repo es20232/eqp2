@@ -11,6 +11,7 @@ function ProfileScreen() {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -35,11 +36,11 @@ function ProfileScreen() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/posts");
+        const response = await axios.get("http://localhost:8080/api/feed");
         console.log(response.data);
         const postsWithFullMediaUrl = response.data.map((post) => ({
           ...post,
-          media: `http://localhost:8080${post.media}`,
+          image: `http://localhost:8080${post.image}`,
         }));
 
         setPosts(postsWithFullMediaUrl);
@@ -70,15 +71,18 @@ function ProfileScreen() {
       <Container>
         <Row>
           {posts.map((post) => {
-            if (post.id_user === userData.id) {
+            if (post.user === userData.id) {
               return (
-                <Col className="mt-2" xs={6} md={4}>
+                <Col className={hovered ? "mt-4" : "mt-2"} xs={6} md={4}>
                   <Image
-                    alt={post.id}
-                    src={post.media}
+                    alt={post.image}
+                    src={post.image}
                     height={400}
                     width={400}
                     rounded
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
+                    style={{ transition: "margin-top 5s ease" }} // Adiciona uma transição suave
                   />
                 </Col>
               );

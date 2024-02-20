@@ -26,7 +26,7 @@ function App() {
           <Route path="/dashboard" element={<DashBoardScreen/>} />
           <Route path="/refresh" element={<RefreshScreen/>} />
           <Route path="/change_password" element={<ChangePasswordScreen/>} />
-          <Route path="/comments" element={<CommentsScreen/>} />
+          <Route path="/comments/:post_id" element={<CommentsScreen/>} />
         </Routes>
       </Router>
     </>

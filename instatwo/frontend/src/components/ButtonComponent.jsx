@@ -27,7 +27,7 @@ export default function ButtonComponent(props) {
         onMouseOut={(e) => (e.target.style.opacity = 1)} 
         onChange={onChange || (() => {})}
       >
-        {text}
+        {text ? text : <input type="file" id="image" name="image"/>}
       </Button>
     </Link>
     </>

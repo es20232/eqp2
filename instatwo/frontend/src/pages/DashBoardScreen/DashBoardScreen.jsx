@@ -10,14 +10,45 @@ import { useState } from "react";
 import { Image } from "react-bootstrap";
 import InputFormComponent from "../../components/InputFormComponent";
 import AlertNoLogin from "../../AlertNoLogin";
+import profileIcon from "../../images/profile-icon-design-free-vector.jpg";
 
 const CardFeedImage = (props) => {
+  const handleLike = async () => {
+    try {
+      const response = await axios.post("http://localhost:8080/api/send-like", {
+        post_id: props.postId,
+        user_id: props.userId,
+        weight: true,
+      });
+      console.log("Like enviado com sucesso:", response.data);
+      alert("Like enviado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao enviar like:", error);
+      // Tratar o erro, se necessário
+    }
+  };
+
+  const handleDislike = async () => {
+    try {
+      const response = await axios.post("http://localhost:8080/api/send-like", {
+        post_id: props.postId,
+        user_id: props.userId,
+        weight: false,
+      });
+      console.log("Dislike enviado com sucesso:", response.data);
+      alert("Dislike enviado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao enviar dislike:", error);
+      // Tratar o erro, se necessário
+    }
+  };
+
   return (
     <>
       <Card.Title className="text-start mt-2 mb-2">
         <div style={{ marginLeft: "1.1rem" }}>
           <ProfileImage
-            imageURL={props.imageURL}
+            imageURL={props.imageURL ? props.imageURL : profileIcon}
             altText="Profile Image"
             size="45px" // Tamanho menor
             allowChange={false}
@@ -61,6 +92,7 @@ const CardFeedImage = (props) => {
               size="48px"
               buttonColor="#267094"
               sizeRound="8px"
+              onClick={handleLike}
             />
             {"  "}
             <ButtonComponent
@@ -69,11 +101,12 @@ const CardFeedImage = (props) => {
               size="48px"
               buttonColor="#ff0000"
               sizeRound="8px"
+              onClick={handleDislike}
             />
           </Col>
           <Col xs="auto">
             <ButtonComponent
-              to="/comments"
+              to={`/comments/${props.post_id}`}
               buttonColor="#4d4d4d"
               textColor="white"
               text="Comentários"
@@ -88,18 +121,17 @@ const CardFeedImage = (props) => {
 
 export default function DashBoardScreen() {
   const [posts, setPosts] = useState([]);
-  const [postImage, setPostImage] = useState(null);
   const [publish, setPublish] = useState(false);
   const [caption, setCaption] = useState("");
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/posts");
+        const response = await axios.get("http://localhost:8080/api/feed");
         console.log(response.data);
         const postsWithFullMediaUrl = response.data.map((post) => ({
           ...post,
-          media: `http://localhost:8080${post.media}`,
+          image: `http://localhost:8080${post.image}`,
         }));
 
         setPosts(postsWithFullMediaUrl);
@@ -126,12 +158,6 @@ export default function DashBoardScreen() {
         setUserData(response.data);
         setLoading(false);
         setIsLoggedIn(true);
-
-        const responseUsers = await axios.get(
-          "http://localhost:8080/api/users"
-        );
-        console.log(responseUsers.data);
-        setUsers(responseUsers.data);
       } catch (error) {
         console.error("Erro ao recuperar dados do usuário:", error);
         setLoading(false);
@@ -142,6 +168,47 @@ export default function DashBoardScreen() {
     checkAuthentication();
   }, []);
 
+  const [image, setImage] = useState(null);
+  const [erro, setErro] = useState(null);
+
+  const handleInputChange = (event) => {
+    if (event.target.name === "caption") {
+      setCaption(event.target.value);
+    } else if (event.target.name === "POST_IMAGE") {
+      setImage(event.target.files[0]);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const formData = new FormData();
+      formData.append("caption", caption);
+      formData.append("POST_IMAGE", image);
+
+      const response = await axios.post(
+        "http://localhost:8080/api/create-post",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("Postagem criada com sucesso:", response.data);
+
+      // Limpar campos e recarregar a página após envio bem-sucedido
+      setCaption("");
+      setImage(null);
+      window.location.reload(); // Recarrega a página
+    } catch (error) {
+      setErro(error.response.data.detail);
+      console.error("Erro ao criar postagem:", error);
+    }
+  };
+
   if (loading) {
     return <p>Carregando...</p>;
   }
@@ -149,25 +216,6 @@ export default function DashBoardScreen() {
   if (!isLoggedIn) {
     return <AlertNoLogin />;
   }
-
-  // const handleImageChange = (e) => {
-  //   const file = e.target.files[0];
-  //   setPostImage(file);
-  // };
-
-  // const handleUploadImage = () => {
-  //   const formData = new FormData();
-  //   formData.append("image", postImage);
-
-  //   axios
-  //     .post("http://sua-api.com/upload", formData)
-  //     .then((response) => {
-  //       console.log("Imagem enviada com sucesso:", response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Erro ao enviar imagem:", error);
-  //     });
-  // };
 
   return (
     <>
@@ -195,7 +243,8 @@ export default function DashBoardScreen() {
                       label="Insira uma legenda:"
                       value={caption}
                       placeholder="Digite uma legenda..."
-                      onChange={(e) => setCaption(e.target.value)}
+                      name="caption"
+                      onChange={(e) => handleInputChange(e)}
                     ></InputFormComponent>
                   </Col>
                 </Row>
@@ -226,16 +275,28 @@ export default function DashBoardScreen() {
                 </Col>
                 <Col xs="auto">
                   {/* <input type="file" onChange={handleImageChange} /> */}
-                  <ButtonComponent
-                    buttonColor="#4b89be"
-                    textColor="white"
-                    text="Publicar"
-                    size="130px"
-                    sizeRound="8px"
-                    onClick={() => {
-                      setPublish(true);
-                    }}
-                  />
+                  <form onSubmit={handleSubmit}>
+                    <div>
+                      <label htmlFor="caption">Legenda:</label>
+                      <input
+                        type="text"
+                        id="caption"
+                        name="caption"
+                        value={caption}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="image">Imagem:</label>
+                      <input
+                        type="file"
+                        id="image"
+                        name="POST_IMAGE"
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                    <button type="submit">Enviar</button>
+                  </form>
                 </Col>
               </Row>
             }
@@ -243,29 +304,32 @@ export default function DashBoardScreen() {
           />
         )}
 
-        {posts.map((post) => {
-          return (
-            <ContainerComponent
-              colorBackground="#e6e6e6"
-              width="32rem"
-              padding="p-0"
-              content={
-                <CardFeedImage
-                  imageURL={
-                    // users.id === posts.id_user
-                    //   ? users.img
-                    //   : "https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
-                    userData.img
-                  }
-                  name={userData.name}
-                  altText={post.id}
-                  srcImage={post.media}
-                  caption={post.caption}
-                />
-              }
-            />
-          );
-        })}
+        {posts
+          .slice()
+          .reverse()
+          .map((post) => {
+            return (
+              <ContainerComponent
+                colorBackground="#e6e6e6"
+                width="32rem"
+                padding="p-0"
+                content={
+                  <CardFeedImage
+                    imageURL={
+                      userData.img === null ? userData.img : profileIcon
+                    }
+                    name={post.name}
+                    altText={post.id}
+                    srcImage={post.image}
+                    caption={post.caption}
+                    postId={post.id}
+                    userId={userData.id}
+                    post_id={post.id}
+                  />
+                }
+              />
+            );
+          })}
       </Container>
     </>
   );

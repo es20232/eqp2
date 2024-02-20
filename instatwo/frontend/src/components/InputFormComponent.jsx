@@ -29,6 +29,7 @@ function InputFormComponent(props) {
             backgroundColor: props.colorBackground || "#cccccc",
             color: "#13293d",
           }}
+          name={props.name || ""}
         />
       </Form.Group>
     </>

@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { Row, Col, Container, Button} from "react-bootstrap";
+import { Row, Col, Container, Button } from "react-bootstrap";
 import ProfileImage from "../../components/ProfileImage";
 import ButtonComponent from "../../components/ButtonComponent";
 import axios from "axios";
@@ -59,12 +59,10 @@ function UserInformation() {
   }, []);
 
   const handleLogout = async () => {
-
     try {
       await axios.post("http://localhost:8080/api/logout");
       window.location.reload();
-      setIsLoggedIn(false)
-      
+      setIsLoggedIn(false);
     } catch (error) {
       console.error("Erro ao fazer logout:", error);
     }
@@ -89,9 +87,7 @@ function UserInformation() {
   }
 
   if (!isLoggedIn) {
-    return (
-      <AlertNoLogin/>
-    );
+    return <AlertNoLogin />;
   }
 
   const bioInfo =
@@ -102,7 +98,7 @@ function UserInformation() {
       <Row className="d-flex ">
         <Col xs="auto" style={{ marginRight: "40px" }}>
           <ProfileImage
-            imageURL={userData.img ? userData.img : profileIcon}
+            imageURL={userData.img === null ? userData.img : profileIcon}
             altText="Profile Image"
             size="150px"
             allowChange={false}
@@ -115,10 +111,13 @@ function UserInformation() {
           <p style={{ color: "#999999", fontWeight: "normal" }}>
             @{userData.username}
           </p>
-          <LimitedText text={userData.bio ? userData.bio : bioInfo} limit={50} />
+          <LimitedText
+            text={userData.bio ? userData.bio : bioInfo}
+            limit={50}
+          />
         </Col>
 
-        <Col style={{marginLeft: "10rem"}}>
+        <Col style={{ marginLeft: "10rem" }}>
           <Row>
             <Col className="d-flex flex-column align-items-center justify-content-center">
               <h1 style={{ color: "#4d4d4d", fontWeight: "bold " }}>0</h1>

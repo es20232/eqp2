@@ -8,6 +8,8 @@ import InputFormComponent from "../../components/InputFormComponent";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AlertNoLogin from "../../AlertNoLogin";
+import { useParams } from "react-router-dom";
+import profileIcon from "../../images/profile-icon-design-free-vector.jpg";
 
 export default function CommentsScreen() {
   const [comments, setComments] = useState();
@@ -16,13 +18,28 @@ export default function CommentsScreen() {
   });
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [likes, setLikes] = useState([]);
+  const { post_id } = useParams();
 
   useEffect(() => {
-    const checkAuthentication = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/user");
-        response.data.img = "http://localhost:8080/" + response.data.img;
-        setUserData(response.data);
+        // Solicitar dados do usuário
+        const userDataResponse = await axios.get(
+          "http://localhost:8080/api/user"
+        );
+        userDataResponse.data.img =
+          "http://localhost:8080/" + userDataResponse.data.img;
+        setUserData(userDataResponse.data);
+
+        console.log(post_id);
+
+        // Solicitar likes/deslikes do post
+        const likesResponse = await axios.get(
+          `http://localhost:8080/api/get-likes?post_id=${post_id}`
+        );
+        setLikes(likesResponse.data);
+
         setLoading(false);
         setIsLoggedIn(true);
       } catch (error) {
@@ -32,7 +49,41 @@ export default function CommentsScreen() {
       }
     };
 
-    checkAuthentication();
+    fetchData();
+  }, []);
+
+  const enviarComentario = async (post_id, text) => {
+    console.log("Enviando comentário:", post_id, text);
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/post-comment",
+        { post_id, text }
+      );
+      console.log("Comentário postado:", response.data);
+      setComments("");
+      window.location.reload();
+    } catch (error) {
+      console.error("Erro ao postar comentário:", error);
+      // Trate o erro, se necessário
+    }
+  };
+
+  const [comentarios, setComentarios] = useState([]);
+
+  useEffect(() => {
+    const obterComentarios = async (post_id) => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/get-comments?post_id=${post_id}`
+        );
+        setComentarios(response.data);
+        console.log("Comentários:", response.data);
+      } catch (error) {
+        console.error("Erro ao recuperar comentários:", error);
+      }
+    };
+
+    obterComentarios(post_id);
   }, []);
 
   if (loading) {
@@ -58,9 +109,7 @@ export default function CommentsScreen() {
                 <div className="mb-2">
                   <ProfileImage
                     imageURL={
-                      userData.img
-                        ? userData.img
-                        : "https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
+                      userData.img === null ? userData.img : profileIcon
                     }
                     altText="Profile Image"
                     size="45px" // Tamanho menor
@@ -76,12 +125,23 @@ export default function CommentsScreen() {
               </Card.Title>
               <hr className="my-2" />
               <Card.Body>
-                <Comment />
-                <Comment />
-                <CommentLike />
-                <Comment />
-                <CommentLike/>
-
+                {likes.map((like, index) => (
+                  <CommentLike
+                    key={index}
+                    userName={like.liked_by.username}
+                    action={like.weight}
+                    timestamp={like.liked_at}
+                    profileImg={null}
+                  />
+                ))}
+                <hr className="my-2" />
+                {comentarios.map((comentario, index) => (
+                  <Comment
+                    key={index}
+                    author={comentario.author.username}
+                    text={comentario.text}
+                  />
+                ))}
                 <hr className="my-2" />
 
                 <div style={{ marginTop: "10%" }}>
@@ -92,7 +152,7 @@ export default function CommentsScreen() {
                         label="Comentar:"
                         value={comments}
                         placeholder="Insira um comentario..."
-                        //   onChange={(e) => setCaption(e.target.value)}
+                        onChange={(e) => setComments(e.target.value)}
                       ></InputFormComponent>
                     </Col>
                   </Row>
@@ -104,7 +164,11 @@ export default function CommentsScreen() {
                         text="Comentar"
                         size="130px"
                         sizeRound="8px"
-                        onChange={() => setComments(comments)}
+                        onClick={
+                          comments
+                            ? () => enviarComentario(post_id, comments)
+                            : () => {}
+                        }
                       />
                     </Col>
                   </Row>
@@ -118,42 +182,46 @@ export default function CommentsScreen() {
   );
 }
 
-function Comment() {
+function Comment({ author, text, key }) {
   return (
     <>
-      <Card.Text>
+      <Card.Text key={key}>
         <p>
-          <span style={{ color: "#4d4d4d", fontWeight: "bold" }}>Nome</span>{" "}
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It
-          has roots in a piece of classical Latin literature from 45 BC, making
-          it over 2000 years old.
+          <span style={{ color: "#4d4d4d", fontWeight: "bold" }}>{author}</span>{" "}
+          {text}
         </p>
       </Card.Text>
     </>
   );
 }
 
-function CommentLike() {
+function CommentLike({ userName, action, timestamp, profileImg }) {
+  const likedAt = new Date(timestamp);
+
+  const formattedDate = likedAt.toLocaleDateString();
+  const formattedTime = likedAt.toLocaleTimeString();
+
   return (
     <>
       <Card.Text>
-          <div className="mb-2">
-            <ProfileImage
-              imageURL={
-                "https://htmlcolorcodes.com/assets/images/colors/bright-blue-color-solid-background-1920x1080.png"
-              }
-              altText="Profile Image"
-              size="30px" // Tamanho menor
-              allowChange={false}
-            />
-            <span
-              className="ms-2"
-              style={{ color: "#4d4d4d", fontWeight: "bold" }}
-            >
-              Nome
-            </span>{" "}
-            Curtiu sua postagem - <span>(12:00 | 12/03/2024)</span>
-          </div>
+        <div className="mb-2">
+          <ProfileImage
+            imageURL={
+              profileImg === null ? profileIcon : profileImg
+            }
+            altText="Profile Image"
+            size="30px" // Tamanho menor
+            allowChange={false}
+          />
+          <span
+            className="ms-2"
+            style={{ color: "#4d4d4d", fontWeight: "bold" }}
+          >
+            {userName}
+          </span>{" "}
+          {action ? "Curtiu" : "Descurtiu"} sua postagem -{" "}
+          <span>{formattedDate + " às " + formattedTime}</span>
+        </div>
       </Card.Text>
     </>
   );

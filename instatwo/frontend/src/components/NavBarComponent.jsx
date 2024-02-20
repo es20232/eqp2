@@ -131,7 +131,7 @@ function NavBarComponent() {
                       <Col xs="auto" className="p-0 m-0">
                         <Navbar.Brand>
                           <ProfileImage
-                            imageURL={userData.img ? userData.img : profileIcon}
+                            imageURL={userData.img === null ? userData.img : profileIcon}
                             altText="Profile Image"
                             size="45px" // Tamanho menor
                           />
