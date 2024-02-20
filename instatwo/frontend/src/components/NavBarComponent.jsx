@@ -7,6 +7,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import profileIcon from "../images/profile-icon-design-free-vector.jpg";
 import Form from "react-bootstrap/Form";
+import img02 from "../images/img02.png";
 
 function NavBarComponent() {
   const [userData, setUserData] = useState({});
@@ -90,7 +91,7 @@ function NavBarComponent() {
             href={isLoggedIn ? "/dashboard" : "/"}
             style={logoStyle}
           >
-            InstaTwo
+            <img src={img02} alt="Logo" style={{ width: "180px" }} />
           </Navbar.Brand>
 
           {isLoggedIn && (
